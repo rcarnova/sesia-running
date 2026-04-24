@@ -203,3 +203,24 @@
 .pageInfo { font-size: 13px; color: #6b7280; }
 
 .loading { padding: 2rem; text-align: center; color: #6b7280; font-size: 14px; }
+
+@media (max-width: 600px) {
+  .wrapper { margin: 0; border-radius: 0; }
+
+  .statsBar { grid-template-columns: repeat(2, 1fr); }
+
+  .table { table-layout: auto; font-size: 13px; }
+
+  .thBar, .tdBar { display: none; }
+  .thCenter, .tdNum { width: 44px; padding: 8px 6px; }
+  .thRank { width: 36px; }
+
+  .table th, .table td { padding: 8px 8px; }
+
+  .tdPts { font-size: 15px; }
+
+  .freeBadge { display: none; }
+
+  .toolbar { flex-wrap: wrap; }
+  .updateBadge { margin-left: 0; }
+}
