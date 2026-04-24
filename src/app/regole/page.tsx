@@ -32,7 +32,7 @@ export default function RegolePage() {
           <div className={headerStyles.logoBadge}>SR</div>
           <div>
             <div className={headerStyles.headerTitle}>Sesia Running Vercelli</div>
-            <div className={headerStyles.headerSub}>Stagione 2024-25</div>
+            <div className={headerStyles.headerSub}>Stagione 25-26</div>
           </div>
         </div>
         <nav className={headerStyles.nav}>

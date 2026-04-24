@@ -64,7 +64,7 @@ export default function Home() {
           <Image src="/logo.png" alt="Sesia Running Vercelli" width={52} height={52} className={styles.logoImg} />
           <div>
             <div className={styles.headerTitle}>Sesia Running Vercelli</div>
-            <div className={styles.headerSub}>Stagione {data?.stagione ?? '2024-25'}</div>
+            <div className={styles.headerSub}>Stagione {data?.stagione ?? '25-26'}</div>
           </div>
         </div>
         <nav className={styles.nav}>
