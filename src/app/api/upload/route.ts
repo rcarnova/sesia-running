@@ -51,14 +51,12 @@ export async function POST(req: NextRequest) {
 
     atleti.sort((a, b) => b.punti - a.punti)
 
-    const oggi = new Date()
-    const aggiornatoIl = oggi.toLocaleDateString('it-IT', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    })
+    const dataOverride = formData.get('dataClassifica') as string | null
+    const aggiornatoIl = dataOverride?.trim()
+      ? dataOverride.trim()
+      : new Date().toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' })
 
-    writeClassifica({ atleti, aggiornatoIl, stagione: '2024-25' })
+    writeClassifica({ atleti, aggiornatoIl, stagione: '2025-26' })
 
     return NextResponse.json({
       ok: true,

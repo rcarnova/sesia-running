@@ -64,6 +64,32 @@
   letter-spacing: 0.3px;
 }
 
+.dateField {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.dateLabel {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #5a7a9a;
+  white-space: nowrap;
+}
+
+.dateInput {
+  padding: 6px 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--sr-black);
+  background: var(--sr-white);
+  border: 1px solid #c0cede;
+  border-radius: 2px;
+  outline: none;
+}
+.dateInput:focus { border-color: var(--sr-blue); }
+
 .alertSuccess {
   margin-top: 12px;
   padding: 10px 16px;

@@ -11,11 +11,21 @@ const ADMIN_SECRET = process.env.NEXT_PUBLIC_ADMIN_SECRET ?? ''
 
 type UploadState = 'idle' | 'loading' | 'success' | 'error'
 
+function todayIso() {
+  return new Date().toISOString().slice(0, 10)
+}
+
+function formatItalianDate(iso: string) {
+  const [y, m, d] = iso.split('-')
+  return `${d}/${m}/${y}`
+}
+
 export default function AdminPage() {
   const [dragOver, setDragOver] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const [state, setState] = useState<UploadState>('idle')
   const [result, setResult] = useState<{ atletiImportati?: number; aggiornatoIl?: string; error?: string } | null>(null)
+  const [dataClassifica, setDataClassifica] = useState(todayIso)
   const inputRef = useRef<HTMLInputElement>(null)
 
   function handleFileSelect(f: File) {
@@ -29,6 +39,7 @@ export default function AdminPage() {
     setState('loading')
     const fd = new FormData()
     fd.append('file', file)
+    fd.append('dataClassifica', formatItalianDate(dataClassifica))
     try {
       const res = await fetch('/api/upload', {
         method: 'POST',
@@ -92,6 +103,19 @@ export default function AdminPage() {
               {file ? file.name : 'Trascina il file .xlsx qui, oppure clicca per selezionarlo'}
             </div>
             {file && <div className={styles.dropSub}>{(file.size / 1024).toFixed(1)} KB</div>}
+          </div>
+
+          <div className={styles.dateField}>
+            <label className={styles.dateLabel} htmlFor="dataClassifica">
+              Data classifica
+            </label>
+            <input
+              id="dataClassifica"
+              type="date"
+              className={styles.dateInput}
+              value={dataClassifica}
+              onChange={(e) => setDataClassifica(e.target.value)}
+            />
           </div>
 
           <input
