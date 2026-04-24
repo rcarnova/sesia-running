@@ -1,6 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next'
 import { Bebas_Neue, Barlow_Condensed } from 'next/font/google'
+import Footer from '@/app/components/Footer'
 import './globals.css'
 
 const bebasNeue = Bebas_Neue({
@@ -23,7 +24,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it">
-      <body className={`${bebasNeue.variable} ${barlowCondensed.variable}`}>{children}</body>
+      <body className={`${bebasNeue.variable} ${barlowCondensed.variable}`}>
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }

@@ -1,0 +1,43 @@
+.footer {
+  background: #111;
+  color: #9ca3af;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  font-size: 13px;
+  font-family: var(--font-body);
+  border-top: 3px solid var(--sr-green, #4a9a3f);
+}
+
+.name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail {
+  line-height: 1.9;
+  color: #9ca3af;
+}
+
+.social {
+  display: block;
+  line-height: 1.9;
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.social:hover { color: var(--sr-green, #4a9a3f); }
+
+@media (max-width: 600px) {
+  .footer {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 1.2rem 1rem;
+  }
+}
