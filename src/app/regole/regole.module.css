@@ -1,57 +1,77 @@
 /* src/app/regole/regole.module.css */
-.content { padding: 1.5rem; }
+.content {
+  padding: 1.5rem;
+  background: var(--white);
+}
 
 .section { margin-bottom: 2rem; }
 
 .sectionTitle {
   font-family: var(--font-display);
-  font-size: 15px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.8px;
-  color: #374151;
-  margin-bottom: 12px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid #e8ecf2;
+  font-size: 26px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--black);
+  margin-bottom: 14px;
+  padding-left: 14px;
+  border-left: 4px solid var(--accent);
+  line-height: 1;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 8px;
+  gap: 6px;
 }
 
 .ruleCard {
   display: flex; align-items: center; gap: 12px;
-  background: #f8f9fb;
-  border-radius: 8px;
+  background: var(--black);
   padding: 10px 14px;
 }
 
 .rulePts {
   font-family: var(--font-display);
-  font-size: 20px; font-weight: 700;
-  color: var(--sr-blue);
-  min-width: 36px;
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: var(--accent);
+  min-width: 42px;
   text-align: center;
+  line-height: 1;
 }
 
-.ptsBonus { color: #b45309; }
+.ptsBonus { color: var(--accent); }
 
-.ruleDesc { font-size: 13px; color: #4b5563; line-height: 1.4; }
+.ruleDesc {
+  font-size: 13px;
+  color: #ccc;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+}
 
 .rewardCard {
-  display: flex; align-items: center; gap: 16px;
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  border-radius: 10px;
-  padding: 16px 20px;
+  display: flex; align-items: center; gap: 20px;
+  background: var(--black);
+  border-left: 4px solid var(--accent);
+  padding: 18px 22px;
   max-width: 520px;
 }
 
 .rewardPts {
   font-family: var(--font-display);
-  font-size: 22px; font-weight: 700;
-  color: #065f46;
+  font-size: 36px;
+  letter-spacing: 1px;
+  color: var(--accent);
   white-space: nowrap;
+  line-height: 1;
 }
 
-.rewardText { font-size: 14px; color: #064e3b; line-height: 1.5; }
+.rewardText {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.5;
+}
+
+.rewardText strong {
+  color: var(--white);
+}

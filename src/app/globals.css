@@ -2,19 +2,22 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --sr-blue: #1a4f8a;
-  --sr-blue-hover: #2563b0;
-  --sr-gold: #c8962a;
-  --font-body: var(--font-barlow), sans-serif;
-  --font-display: var(--font-barlow-condensed), sans-serif;
+  --accent: #FF6B00;
+  --black: #111111;
+  --white: #fafafa;
+  --grey-dark: #1a1a1a;
+  --grey-mid: #2a2a2a;
+  --grey-border: #333333;
+  --font-body: var(--font-barlow-condensed), 'Arial Narrow', sans-serif;
+  --font-display: var(--font-bebas), 'Impact', sans-serif;
 }
 
 html { font-size: 16px; }
 
 body {
   font-family: var(--font-body);
-  background: #f0f2f5;
-  color: #1a1a1a;
+  background: var(--grey-dark);
+  color: var(--white);
   min-height: 100vh;
 }
 

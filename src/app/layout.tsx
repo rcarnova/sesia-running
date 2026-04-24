@@ -1,17 +1,17 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next'
-import { Barlow, Barlow_Condensed } from 'next/font/google'
+import { Bebas_Neue, Barlow_Condensed } from 'next/font/google'
 import './globals.css'
 
-const barlow = Barlow({
+const bebasNeue = Bebas_Neue({
   subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-barlow',
+  weight: ['400'],
+  variable: '--font-bebas',
 })
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ['latin'],
-  weight: ['600', '700'],
+  weight: ['400', '500'],
   variable: '--font-barlow-condensed',
 })
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it">
-      <body className={`${barlow.variable} ${barlowCondensed.variable}`}>{children}</body>
+      <body className={`${bebasNeue.variable} ${barlowCondensed.variable}`}>{children}</body>
     </html>
   )
 }
