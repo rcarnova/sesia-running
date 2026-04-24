@@ -14,7 +14,7 @@ export default function Footer() {
         <div className={styles.detail}>Affiliata UISP · Stagione 2025-26</div>
       </div>
       <div className={styles.col}>
-        <a href="https://www.facebook.com/people/ASD-Sesia-Running/61550875047800/"
+        <a href="https://www.facebook.com/sesiarunning"
            target="_blank" rel="noopener noreferrer" className={styles.social}>
           Facebook
         </a>
