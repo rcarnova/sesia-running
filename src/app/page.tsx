@@ -2,6 +2,7 @@
 'use client'
 
 import { useEffect, useState, useMemo } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Classifica, Atleta } from '@/lib/types'
 import styles from './page.module.css'
@@ -60,7 +61,7 @@ export default function Home() {
       {/* HEADER */}
       <header className={styles.header}>
         <div className={styles.headerLogo}>
-          <div className={styles.logoBadge}>SR</div>
+          <Image src="/logo.png" alt="Sesia Running Vercelli" width={52} height={52} className={styles.logoImg} />
           <div>
             <div className={styles.headerTitle}>Sesia Running Vercelli</div>
             <div className={styles.headerSub}>Stagione {data?.stagione ?? '2024-25'}</div>
