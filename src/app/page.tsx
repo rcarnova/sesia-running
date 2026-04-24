@@ -35,7 +35,6 @@ export default function Home() {
     return list
   }, [data, search, sortKey])
 
-  const maxPts = data ? Math.max(...data.atleti.map((a) => a.punti)) : 1
   const totalPages = Math.ceil(sorted.length / PAGE_SIZE)
   const slice = sorted.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
@@ -133,13 +132,13 @@ export default function Home() {
                 <th className={styles.thCenter}>Punti</th>
                 <th className={styles.thCenter}>Gare</th>
                 <th className={styles.thCenter}>Ritrovi</th>
-                <th className={styles.thBar}>Progressione</th>
+                <th className={styles.thBar}>Verso 60 Pt</th>
               </tr>
             </thead>
             <tbody>
               {slice.map((atleta) => {
                 const rank = rankMap.get(atleta.nome) ?? 0
-                const pct = maxPts > 0 ? Math.round((atleta.punti / maxPts) * 100) : 0
+                const pct = Math.min(100, Math.round((atleta.punti / 60) * 100))
                 return (
                   <tr key={atleta.nome} className={styles.row}>
                     <td className={styles.tdRank}>
@@ -156,7 +155,11 @@ export default function Home() {
                     <td className={styles.tdNum}>{atleta.ritrovi}</td>
                     <td className={styles.tdBar}>
                       <div className={styles.barWrap}>
-                        <div className={styles.barFill} style={{ width: `${pct}%` }} />
+                        <div
+                            className={styles.barFill}
+                            style={{ width: `${pct}%` }}
+                            data-full={atleta.punti >= 60 ? 'true' : undefined}
+                          />
                       </div>
                     </td>
                   </tr>
