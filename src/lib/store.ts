@@ -10,8 +10,8 @@ import { readFileSync, writeFileSync, existsSync } from 'fs'
 const DATA_PATH = join(process.cwd(), 'data', 'classifica.json')
 
 const DEFAULT: Classifica = {
-  aggiornatoIl: '01/03/2026',
-  stagione: '2024-25',
+  aggiornatoIl: '24/04/2026',
+  stagione: '2025-26',
   atleti: [
     { nome: 'Daniele Fiorentino', punti: 48, gare: 4, ritrovi: 7 },
     { nome: 'Paolo Gagnone', punti: 29, gare: 3, ritrovi: 7 },
