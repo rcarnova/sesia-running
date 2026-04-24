@@ -91,7 +91,7 @@
 /* ── STATS BAR ───────────────────────────────────────────── */
 .statsBar {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   background: var(--sr-white);
   border-bottom: 2px solid #e0e8f0;
 }

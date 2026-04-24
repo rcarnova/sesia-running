@@ -84,10 +84,7 @@ export default function Home() {
             <div className={styles.statNum}>{stats.gare}</div>
             <div className={styles.statLabel}>Gare totali</div>
           </div>
-          <div className={styles.statCell}>
-            <div className={styles.statNum}>{stats.ritrovi}</div>
-            <div className={styles.statLabel}>Ritrovi</div>
-          </div>
+
           <div className={styles.statCell}>
             <div className={`${styles.statNum} ${styles.statGold}`}>{stats.gratuiti}</div>
             <div className={styles.statLabel}>Tesser. gratuiti</div>
