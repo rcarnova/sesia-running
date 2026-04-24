@@ -2,6 +2,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import headerStyles from '../page.module.css'
 import styles from './admin.module.css'
@@ -52,7 +53,7 @@ export default function AdminPage() {
     <div className={headerStyles.wrapper}>
       <header className={headerStyles.header}>
         <div className={headerStyles.headerLogo}>
-          <div className={headerStyles.logoBadge}>SR</div>
+          <Image src="/logo.png" alt="Sesia Running Vercelli" width={52} height={52} className={headerStyles.logoImg} />
           <div>
             <div className={headerStyles.headerTitle}>Sesia Running Vercelli</div>
             <div className={headerStyles.headerSub}>Pannello Admin</div>

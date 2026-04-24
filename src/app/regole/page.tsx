@@ -1,4 +1,5 @@
 // src/app/regole/page.tsx
+import Image from 'next/image'
 import Link from 'next/link'
 import styles from './regole.module.css'
 import headerStyles from '../page.module.css'
@@ -29,7 +30,7 @@ export default function RegolePage() {
     <div className={headerStyles.wrapper}>
       <header className={headerStyles.header}>
         <div className={headerStyles.headerLogo}>
-          <div className={headerStyles.logoBadge}>SR</div>
+          <Image src="/logo.png" alt="Sesia Running Vercelli" width={52} height={52} className={headerStyles.logoImg} />
           <div>
             <div className={headerStyles.headerTitle}>Sesia Running Vercelli</div>
             <div className={headerStyles.headerSub}>Stagione 25-26</div>
