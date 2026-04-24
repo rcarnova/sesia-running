@@ -1,143 +1,163 @@
 /* src/app/admin/admin.module.css */
 .content {
   padding: 1.5rem;
-  background: var(--white);
+  background: var(--sr-white);
 }
 
 .section { margin-bottom: 2rem; }
 
 .sectionTitle {
   font-family: var(--font-display);
-  font-size: 26px;
-  letter-spacing: 3px;
+  font-size: 24px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--black);
+  color: var(--sr-blue);
   margin-bottom: 10px;
   padding-left: 14px;
-  border-left: 4px solid var(--accent);
-  line-height: 1;
+  border-left: 4px solid var(--sr-green);
+  line-height: 1.1;
 }
 
-.hint { font-size: 13px; color: #555; margin-bottom: 12px; line-height: 1.5; }
+.hint {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #5a7a9a;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
 .hint code {
-  background: var(--black);
-  color: var(--accent);
+  background: #eaf0f8;
+  color: var(--sr-blue);
   padding: 1px 6px;
+  border-radius: 2px;
   font-size: 12px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 .dropZone {
-  border: 2px dashed var(--accent);
+  border: 2px dashed var(--sr-blue);
   padding: 2.5rem 2rem;
   text-align: center;
-  background: #1a1a1a;
+  background: #eaf0f8;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  border-radius: 2px;
+  transition: border-color 0.15s, background 0.15s;
   user-select: none;
 }
-.dropZone:hover { background: #222; border-color: var(--white); }
-.dragOver { border-color: var(--white) !important; background: #222 !important; }
+.dropZone:hover { border-color: var(--sr-green); background: #dff0e8; }
+.dragOver { border-color: var(--sr-green) !important; background: #dff0e8 !important; }
 
-.dropIcon { font-size: 32px; color: var(--accent); margin-bottom: 10px; }
+.dropIcon { font-size: 30px; color: var(--sr-blue); margin-bottom: 10px; }
+
 .dropText {
   font-family: var(--font-display);
   font-size: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--sr-blue);
 }
-.dropSub { font-size: 12px; color: #888; margin-top: 6px; letter-spacing: 0.5px; }
+.dropSub {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: #7a94b0;
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
 
 .alertSuccess {
   margin-top: 12px;
   padding: 10px 16px;
-  background: var(--black);
-  color: #4ade80;
-  border-left: 3px solid #4ade80;
+  background: #dff0e8;
+  color: var(--sr-green);
+  border-left: 3px solid var(--sr-green);
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.5px;
+  border-radius: 2px;
 }
 
 .alertError {
   margin-top: 12px;
   padding: 10px 16px;
-  background: var(--black);
-  color: #f87171;
-  border-left: 3px solid #f87171;
+  background: #fdeaea;
+  color: #b91c1c;
+  border-left: 3px solid #b91c1c;
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.5px;
+  border-radius: 2px;
 }
 
 .actions { margin-top: 14px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
 .btnPrimary {
-  background: var(--black);
-  color: var(--white);
+  background: var(--sr-blue);
+  color: var(--sr-white);
   border: none;
   font-family: var(--font-display);
   font-size: 17px;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   padding: 10px 26px;
-  border-radius: 0;
-  transition: background 0.1s, color 0.1s;
+  border-radius: 2px;
+  transition: background 0.15s;
 }
-.btnPrimary:hover:not(:disabled) { background: var(--accent); color: var(--black); }
-.btnPrimary:disabled { opacity: 0.3; cursor: not-allowed; }
+.btnPrimary:hover:not(:disabled) { background: var(--sr-green); }
+.btnPrimary:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .btnSecondary {
   display: inline-block;
   background: transparent;
-  color: var(--black);
-  border: 1px solid var(--black);
+  color: var(--sr-blue);
+  border: 1px solid var(--sr-blue);
   font-family: var(--font-display);
   font-size: 17px;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   padding: 9px 22px;
-  border-radius: 0;
-  transition: background 0.1s, color 0.1s;
+  border-radius: 2px;
+  transition: background 0.15s, color 0.15s;
   cursor: pointer;
 }
-.btnSecondary:hover { background: var(--black); color: var(--white); }
+.btnSecondary:hover { background: var(--sr-blue); color: var(--sr-white); }
 
 .historyTable { width: 100%; border-collapse: collapse; font-size: 13px; }
 .historyTable td {
+  font-family: var(--font-body);
   padding: 9px 12px;
-  border-bottom: 1px solid #ebebeb;
-  color: #333;
+  border-bottom: 1px solid #eaf0f8;
+  color: #3a5a7a;
 }
 .historyTable td:first-child {
   font-family: var(--font-display);
   font-size: 15px;
   letter-spacing: 1px;
-  color: #888;
+  color: #7a94b0;
 }
 .historyTable td:last-child { text-align: right; }
 .historyTable tr:last-child td { border-bottom: none; }
 
-.statusOk { color: #16a34a !important; font-weight: 500; }
+.statusOk { color: var(--sr-green) !important; font-weight: 500; }
 
 .noteList { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .noteList li {
+  font-family: var(--font-body);
   font-size: 13px;
-  color: #444;
+  color: #4a6a8a;
   padding-left: 16px;
   position: relative;
   line-height: 1.5;
 }
 .noteList li::before {
-  content: '—';
+  content: '–';
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--sr-green);
 }
 .noteList code {
-  background: var(--black);
-  color: var(--accent);
-  padding: 1px 6px;
+  background: #eaf0f8;
+  color: var(--sr-blue);
+  padding: 1px 5px;
+  border-radius: 2px;
   font-size: 12px;
 }

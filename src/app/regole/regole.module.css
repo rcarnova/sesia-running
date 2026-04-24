@@ -1,21 +1,21 @@
 /* src/app/regole/regole.module.css */
 .content {
   padding: 1.5rem;
-  background: var(--white);
+  background: var(--sr-white);
 }
 
 .section { margin-bottom: 2rem; }
 
 .sectionTitle {
   font-family: var(--font-display);
-  font-size: 26px;
-  letter-spacing: 3px;
+  font-size: 24px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--black);
+  color: var(--sr-blue);
   margin-bottom: 14px;
   padding-left: 14px;
-  border-left: 4px solid var(--accent);
-  line-height: 1;
+  border-left: 4px solid var(--sr-green);
+  line-height: 1.1;
 }
 
 .grid {
@@ -26,52 +26,54 @@
 
 .ruleCard {
   display: flex; align-items: center; gap: 12px;
-  background: var(--black);
+  background: #eaf0f8;
+  border-left: 3px solid var(--sr-blue);
   padding: 10px 14px;
+  border-radius: 2px;
 }
 
 .rulePts {
   font-family: var(--font-display);
   font-size: 28px;
   letter-spacing: 1px;
-  color: var(--accent);
+  color: var(--sr-green);
   min-width: 42px;
   text-align: center;
   line-height: 1;
 }
 
-.ptsBonus { color: var(--accent); }
+.ptsBonus { color: var(--sr-aqua); }
 
 .ruleDesc {
+  font-family: var(--font-body);
   font-size: 13px;
-  color: #ccc;
+  color: #3a5a7a;
   line-height: 1.4;
-  letter-spacing: 0.3px;
 }
 
 .rewardCard {
   display: flex; align-items: center; gap: 20px;
-  background: var(--black);
-  border-left: 4px solid var(--accent);
+  background: #eaf0f8;
+  border-left: 4px solid var(--sr-green);
   padding: 18px 22px;
   max-width: 520px;
+  border-radius: 2px;
 }
 
 .rewardPts {
   font-family: var(--font-display);
   font-size: 36px;
   letter-spacing: 1px;
-  color: var(--accent);
+  color: var(--sr-green);
   white-space: nowrap;
   line-height: 1;
 }
 
 .rewardText {
+  font-family: var(--font-body);
   font-size: 14px;
-  color: #ccc;
+  color: #3a5a7a;
   line-height: 1.5;
 }
 
-.rewardText strong {
-  color: var(--white);
-}
+.rewardText strong { color: var(--sr-blue); }
