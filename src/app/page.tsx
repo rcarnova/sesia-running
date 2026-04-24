@@ -69,6 +69,7 @@ export default function Home() {
         <nav className={styles.nav}>
           <Link href="/" className={`${styles.navLink} ${styles.navActive}`}>Classifica</Link>
           <Link href="/regole" className={styles.navLink}>Regole</Link>
+          <Link href="/statuto" className={styles.navLink}>Statuto</Link>
           <Link href="/admin" className={styles.navLink}>Admin</Link>
         </nav>
       </header>

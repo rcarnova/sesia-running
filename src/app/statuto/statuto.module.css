@@ -1,0 +1,82 @@
+/* src/app/statuto/statuto.module.css */
+
+.content {
+  padding: 1.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--sr-white);
+}
+
+.pageTitle {
+  font-family: var(--font-display);
+  font-size: 36px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sr-blue);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.pageSubtitle {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #7a94b0;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.3px;
+}
+
+.downloadBtn {
+  display: inline-block;
+  background: var(--sr-blue);
+  color: var(--sr-white);
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border-radius: 2px;
+  border: none;
+  margin-bottom: 2rem;
+  transition: background 0.15s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.downloadBtn:hover { background: var(--sr-green); }
+
+.titolo {
+  margin-bottom: 2rem;
+}
+
+.titoloHeader {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--sr-white);
+  background: var(--sr-blue);
+  padding: 8px 14px;
+  border-left: 4px solid var(--sr-green);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.articolo {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.artNum {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--sr-blue);
+  margin-bottom: 4px;
+}
+
+.artText {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.7;
+}
