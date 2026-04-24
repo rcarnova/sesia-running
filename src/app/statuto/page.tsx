@@ -152,7 +152,7 @@ export default function StatutoPage() {
           A.S.D. Sesia Running Vercelli — approvato dall&apos;Assemblea dei soci
         </p>
 
-        <a href="/statuto.pdf" download className={styles.downloadBtn}>
+        <a href="/Statuto%20sesia%20running.pdf" download className={styles.downloadBtn}>
           ↓ Scarica PDF
         </a>
 
