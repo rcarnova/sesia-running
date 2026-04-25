@@ -37,7 +37,8 @@ export default function RegolePage() {
           </div>
         </div>
         <nav className={headerStyles.nav}>
-          <Link href="/" className={headerStyles.navLink}>Classifica</Link>
+          <Link href="/" className={headerStyles.navLink}>Home</Link>
+          <Link href="/classifica" className={headerStyles.navLink}>Classifica</Link>
           <Link href="/regole" className={`${headerStyles.navLink} ${headerStyles.navActive}`}>Regole</Link>
           <Link href="/statuto" className={headerStyles.navLink}>Statuto</Link>
           <Link href="/admin" className={headerStyles.navLink}>Admin</Link>
