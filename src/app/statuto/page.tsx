@@ -143,6 +143,7 @@ export default function StatutoPage() {
           <Link href="/classifica" className={headerStyles.navLink}>Classifica</Link>
           <Link href="/regole" className={headerStyles.navLink}>Regole</Link>
           <Link href="/statuto" className={`${headerStyles.navLink} ${headerStyles.navActive}`}>Statuto</Link>
+          <Link href="/gallery" className={headerStyles.navLink}>Galleria</Link>
           <Link href="/admin" className={headerStyles.navLink}>Admin</Link>
         </nav>
       </header>

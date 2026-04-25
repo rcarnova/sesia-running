@@ -37,6 +37,7 @@ export default function HomePage() {
           <li><Link href="/classifica" className={styles.navLink}>CLASSIFICA</Link></li>
           <li><Link href="/regole" className={styles.navLink}>REGOLE</Link></li>
           <li><Link href="/statuto" className={styles.navLink}>STATUTO</Link></li>
+          <li><Link href="/gallery" className={styles.navLink}>GALLERIA</Link></li>
           <li><Link href="/admin" className={styles.navLink}>ADMIN</Link></li>
         </ul>
       </nav>

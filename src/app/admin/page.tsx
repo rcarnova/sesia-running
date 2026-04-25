@@ -75,6 +75,7 @@ export default function AdminPage() {
           <Link href="/classifica" className={headerStyles.navLink}>Classifica</Link>
           <Link href="/regole" className={headerStyles.navLink}>Regole</Link>
           <Link href="/statuto" className={headerStyles.navLink}>Statuto</Link>
+          <Link href="/gallery" className={headerStyles.navLink}>Galleria</Link>
           <Link href="/admin" className={`${headerStyles.navLink} ${headerStyles.navActive}`}>Admin</Link>
         </nav>
       </header>
