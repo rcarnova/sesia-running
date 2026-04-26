@@ -1,0 +1,352 @@
+/* src/app/circuito/circuito.module.css */
+
+/* ── HERO ── */
+.hero {
+  background: var(--sr-blue);
+  padding: 40px 40px 36px;
+  border-bottom: 3px solid var(--sr-green);
+}
+
+.heroBadge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--sr-aqua);
+  background: rgba(90, 180, 214, 0.12);
+  border: 1px solid rgba(90, 180, 214, 0.3);
+  border-radius: 2px;
+  padding: 3px 8px;
+  margin-bottom: 14px;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: 36px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sr-white);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.heroSub {
+  font-family: var(--font-body);
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: var(--sr-aqua);
+}
+
+/* ── CONTENT WRAPPER ── */
+.content {
+  padding: 32px 40px 48px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ── PROSSIMA TAPPA BOX ── */
+.nextBox {
+  background: #fff;
+  border: 1px solid #e8ecf2;
+  border-left: 4px solid var(--sr-green);
+  border-radius: 6px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 12px rgba(74, 154, 63, 0.08);
+}
+
+.nextLabel {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--sr-green);
+  margin-bottom: 6px;
+}
+
+.nextName {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: var(--sr-blue);
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+.nextMeta {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #5a6a7a;
+  margin-bottom: 16px;
+}
+
+.countdown {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.countdownNum {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 1;
+  color: var(--sr-blue);
+  letter-spacing: 1px;
+}
+
+.countdownLabel {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #5a6a7a;
+  letter-spacing: 0.3px;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 20px;
+  margin-bottom: 40px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #e8ecf2 0px,
+    #e8ecf2 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* ── CARDS ── */
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #f7f9fc;
+  border: 1px solid #e8ecf2;
+  border-radius: 6px;
+  padding: 16px 20px;
+  transition: box-shadow 0.15s ease;
+}
+
+.past {
+  opacity: 0.55;
+}
+
+.next {
+  background: #fff;
+  border-left: 3px solid var(--sr-green);
+  box-shadow: 0 2px 12px rgba(74, 154, 63, 0.12);
+}
+
+.future {
+  background: #f7f9fc;
+}
+
+/* ── CARD NUMBER ── */
+.cardNum {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 1px;
+  background: #eef2f8;
+  color: var(--sr-blue);
+}
+
+.numPast { color: #9ca3af; }
+.numNext { color: var(--sr-green); background: #eef9ec; }
+.numFuture { color: var(--sr-blue); }
+
+/* ── CARD BODY ── */
+.cardBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.tappaNome {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  color: var(--sr-blue);
+  line-height: 1;
+}
+
+.badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.finaleBadge {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #fff;
+  background: var(--sr-blue);
+  border-radius: 2px;
+  padding: 2px 6px;
+}
+
+.kmBadge {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #fff;
+  background: var(--sr-green);
+  border-radius: 2px;
+  padding: 2px 7px;
+}
+
+.tappaData {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.dataStrike {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.tappaMeta {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #5a6a7a;
+  margin-bottom: 10px;
+}
+
+/* ── DISTANZE LIST ── */
+.distanze {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.distanzaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+
+.distanzaTipo {
+  color: #374151;
+  font-weight: 500;
+  min-width: 140px;
+}
+
+.distanzaPartenza {
+  color: #5a6a7a;
+}
+
+.distanzaKm {
+  color: var(--sr-green);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+/* ── REGOLAMENTO ── */
+.regolamento {
+  background: #fff;
+  border: 1px solid #e8ecf2;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.regolamentoToggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 16px 20px;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--sr-blue);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.15s ease;
+}
+
+.regolamentoToggle:hover {
+  background: #f7f9fc;
+}
+
+.regolamentoBody {
+  padding: 0 20px 18px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.7;
+  border-top: 1px solid #e8ecf2;
+}
+
+.regolamentoLink {
+  color: var(--sr-blue);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(26, 79, 138, 0.3);
+  transition: border-color 0.15s;
+}
+
+.regolamentoLink:hover {
+  border-color: var(--sr-blue);
+}
+
+/* ── FOOTER NOTE ── */
+.footerNote {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero { padding: 28px 20px; }
+  .heroTitle { font-size: 26px; }
+  .content { padding: 24px 16px 40px; }
+  .nextBox { padding: 18px 16px; }
+  .countdownNum { font-size: 36px; }
+  .card { padding: 14px 14px; }
+  .tappaNome { font-size: 17px; }
+  .distanzaTipo { min-width: 110px; }
+}
+
+@media (max-width: 480px) {
+  .cardHeader { flex-direction: column; align-items: flex-start; }
+  .distanzaItem { flex-wrap: wrap; }
+}

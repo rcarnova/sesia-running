@@ -67,6 +67,7 @@ export default function ClassificaPage() {
         <nav className={styles.nav}>
           <Link href="/" className={styles.navLink}>Home</Link>
           <Link href="/classifica" className={`${styles.navLink} ${styles.navActive}`}>Classifica</Link>
+          <Link href="/circuito"   className={styles.navLink}>Circuito</Link>
           <Link href="/regole" className={styles.navLink}>Regole</Link>
           <Link href="/statuto" className={styles.navLink}>Statuto</Link>
           <Link href="/gallery" className={styles.navLink}>Galleria</Link>

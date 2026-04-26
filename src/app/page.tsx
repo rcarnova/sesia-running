@@ -35,6 +35,7 @@ export default function HomePage() {
         <ul className={styles.navLinks}>
           <li><Link href="/" className={`${styles.navLink} ${styles.navActive}`}>HOME</Link></li>
           <li><Link href="/classifica" className={styles.navLink}>CLASSIFICA</Link></li>
+          <li><Link href="/circuito"   className={styles.navLink}>CIRCUITO</Link></li>
           <li><Link href="/regole" className={styles.navLink}>REGOLE</Link></li>
           <li><Link href="/statuto" className={styles.navLink}>STATUTO</Link></li>
           <li><Link href="/gallery" className={styles.navLink}>GALLERIA</Link></li>
