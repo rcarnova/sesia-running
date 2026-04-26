@@ -6,7 +6,23 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from './home.module.css'
 
+const tappe = [
+  { numero: 1, nome: "Vercelli che Corre",    data: "2026-03-29", luogo: "Vercelli (VC)",          ritrovo: "ore 9:00" },
+  { numero: 2, nome: "Rive Run",               data: "2026-05-24", luogo: "Rive (VC)",              ritrovo: "ore 8:30" },
+  { numero: 3, nome: "Prarolo Run",            data: "2026-06-05", luogo: "Prarolo (VC)",           ritrovo: "ore 18:00" },
+  { numero: 4, nome: "Borgo di Notte",         data: "2026-07-07", luogo: "Borgovercelli (VC)",     ritrovo: "ore 18:00" },
+  { numero: 5, nome: "Strapagiun",             data: "2026-08-16", luogo: "Stroppiana (VC)",        ritrovo: "ore 18:00" },
+  { numero: 6, nome: "Corriparco",             data: "2026-08-27", luogo: "Albano Vercellese (VC)", ritrovo: "ore 18:00" },
+  { numero: 7, nome: "Lungo le Vie d'Acqua",   data: "2026-09-11", luogo: "Formigliana (VC)",       ritrovo: "ore 18:00" },
+]
+
 export default function HomePage() {
+  const today = new Date()
+  const nextTappa = tappe.find(t => new Date(t.data) >= today) ?? null
+  const daysTo = nextTappa
+    ? Math.ceil((new Date(nextTappa.data).getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+    : null
+
   useEffect(() => {
     const reveals = document.querySelectorAll<HTMLElement>(`.${styles.reveal}`)
     const observer = new IntersectionObserver(
@@ -188,6 +204,32 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* CSR26 TEASER */}
+      <section className={styles.csrTeaser}>
+        <div className={styles.csrBadge}>CSR26</div>
+        <h2 className={styles.csrTitle}>2° CIRCUITO SESIA RUNNING 2026</h2>
+        <p className={styles.csrSub}>7 tappe nella Provincia di Vercelli · Marzo — Settembre 2026</p>
+
+        {nextTappa && (
+          <div className={styles.csrNextCard}>
+            <div className={styles.csrNextLabel}>PROSSIMA TAPPA</div>
+            <div className={styles.csrNextName}>{nextTappa.nome}</div>
+            <div className={styles.csrNextDetail}>
+              {new Date(nextTappa.data).toLocaleDateString('it-IT',
+                { day: 'numeric', month: 'long', year: 'numeric' })} · {nextTappa.luogo} · Ritrovo {nextTappa.ritrovo}
+            </div>
+            <div className={styles.csrCountdown}>
+              <span className={styles.csrDays}>{daysTo}</span>
+              <span className={styles.csrDaysLabel}>giorni al via</span>
+            </div>
+          </div>
+        )}
+
+        <a href="/circuito" className={styles.csrCta}>
+          VEDI IL PROGRAMMA COMPLETO →
+        </a>
       </section>
 
       {/* CLASSIFICA TEASER */}

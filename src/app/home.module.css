@@ -555,3 +555,114 @@
   .navLinks { gap: 8px; }
   .navLink { font-size: 12px; }
 }
+
+/* ── CSR26 TEASER ── */
+.csrTeaser {
+  background: #111;
+  padding: 3rem 2rem;
+  text-align: center;
+  border-top: 3px solid var(--sr-green);
+}
+
+.csrBadge {
+  display: inline-block;
+  background: var(--sr-green);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+
+.csrTitle {
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: #fff;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.csrSub {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 2rem;
+  font-family: var(--font-body);
+}
+
+.csrNextCard {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(74,154,63,0.4);
+  border-left: 4px solid var(--sr-green);
+  border-radius: 4px;
+  padding: 1.5rem 2rem;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  text-align: left;
+}
+
+.csrNextLabel {
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--sr-green);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.csrNextName {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.csrNextDetail {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+  font-family: var(--font-body);
+}
+
+.csrCountdown {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.csrDays {
+  font-family: var(--font-display);
+  font-size: 52px;
+  color: var(--sr-blue);
+  line-height: 1;
+}
+
+.csrDaysLabel {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: #9ca3af;
+  letter-spacing: 1px;
+}
+
+.csrCta {
+  display: inline-block;
+  background: var(--sr-green);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 12px 28px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.csrCta:hover { background: var(--sr-blue); }
+
+@media (max-width: 600px) {
+  .csrTitle { font-size: 26px; }
+  .csrNextCard { padding: 1rem; }
+  .csrDays { font-size: 40px; }
+}
