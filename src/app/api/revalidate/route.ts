@@ -3,8 +3,8 @@ import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
-  const secret = req.headers.get('x-admin-secret')
-  if (secret !== process.env.ADMIN_SECRET) {
+  const adminSecret = process.env.ADMIN_SECRET
+  if (adminSecret && req.headers.get('x-admin-secret') !== adminSecret) {
     return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
   }
   revalidatePath('/api/classifica')
