@@ -20,7 +20,7 @@ export default function ClassificaPage() {
   useEffect(() => {
     fetch('/api/classifica')
       .then((r) => r.json())
-      .then(setData)
+      .then((json) => { if (json?.atleti) setData(json) })
   }, [])
 
   const sorted = useMemo<Atleta[]>(() => {
