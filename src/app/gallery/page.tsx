@@ -1,26 +1,16 @@
 // src/app/gallery/page.tsx
-import fs from 'fs'
-import path from 'path'
 import Image from 'next/image'
 import Link from 'next/link'
 import headerStyles from '../page.module.css'
 import styles from './gallery.module.css'
 import GalleryClient from './GalleryClient'
+import photosConfig from '../../../public/gallery/photos.json'
 
 function getGalleryPhotos() {
-  const dir = path.join(process.cwd(), 'public', 'gallery')
-  const files = fs.readdirSync(dir)
-  return files
-    .filter((f) => /\.(jpg|jpeg|png|webp|heic)$/i.test(f))
-    .map((filename) => {
-      const name = filename.replace(/\.[^.]+$/, '')
-      const alt = name.charAt(0).toUpperCase() + name.slice(1).replace(/[_-]/g, ' ')
-      return {
-        src: `/gallery/${encodeURIComponent(filename)}`,
-        alt,
-      }
-    })
-    .sort((a, b) => b.src.localeCompare(a.src))
+  return photosConfig.map((p) => ({
+    src: `/gallery/${encodeURIComponent(p.src)}`,
+    alt: p.caption,
+  }))
 }
 
 export default function GalleryPage() {
