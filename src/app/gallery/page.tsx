@@ -13,17 +13,14 @@ function getGalleryPhotos() {
   return files
     .filter((f) => /\.(jpg|jpeg|png|webp|heic)$/i.test(f))
     .map((filename) => {
-      const filePath = path.join(dir, filename)
-      const mtime = fs.statSync(filePath).mtimeMs
       const name = filename.replace(/\.[^.]+$/, '')
       const alt = name.charAt(0).toUpperCase() + name.slice(1).replace(/[_-]/g, ' ')
       return {
         src: `/gallery/${encodeURIComponent(filename)}`,
         alt,
-        mtime,
       }
     })
-    .sort((a, b) => b.mtime - a.mtime)
+    .sort((a, b) => b.src.localeCompare(a.src))
 }
 
 export default function GalleryPage() {
