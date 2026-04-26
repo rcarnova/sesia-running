@@ -50,7 +50,6 @@ export default function HomePage() {
       {/* HERO */}
       <section className={styles.hero}>
         <div className={styles.heroDiagonal} />
-        <div className={styles.heroGreenStripe} />
         <div className={styles.heroImageWrap}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
