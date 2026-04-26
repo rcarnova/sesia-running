@@ -107,7 +107,7 @@ export async function fetchClassificaFromDrive(): Promise<Classifica> {
   if (!fileId) return DEFAULT
 
   try {
-    const url = `https://drive.google.com/uc?export=download&id=${fileId}`
+    const url = `https://docs.google.com/spreadsheets/d/${fileId}/export?format=xlsx&gid=1508135863`
     const res = await fetch(url, { next: { revalidate: 3600 } })
 
     if (!res.ok) throw new Error(`Drive responded ${res.status}`)
