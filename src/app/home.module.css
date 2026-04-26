@@ -79,13 +79,34 @@
   z-index: 1;
 }
 
-.heroFrog {
+.heroImageWrap {
   position: absolute;
   right: 100px;
   top: 50%;
   transform: translateY(-50%);
+  width: 420px;
+  height: 480px;
+  border-radius: 4px;
+  overflow: hidden;
   z-index: 2;
-  opacity: 0.12;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.heroImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 79, 138, 0.3) 0%,
+    transparent 60%
+  );
 }
 
 .heroContent {
@@ -535,7 +556,7 @@
   .navLink { font-size: 13px; letter-spacing: 0.05em; }
 
   .heroContent { padding: 80px 24px 0; }
-  .heroFrog { display: none; }
+  .heroImageWrap { display: none; }
   .heroSideText { display: none; }
   .heroDiagonal { width: 100%; clip-path: none; opacity: 0.6; }
 

@@ -1,10 +1,11 @@
 // src/app/page.tsx
-'use client'
-
-import { useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './home.module.css'
+import ScrollReveal from './ScrollReveal'
+import photosJson from '../../public/gallery/photos.json'
+
+export const dynamic = 'force-dynamic'
 
 const tappe = [
   { numero: 1, nome: "Vercelli che Corre",    data: "2026-03-29", luogo: "Vercelli (VC)",          ritrovo: "ore 9:00" },
@@ -23,25 +24,12 @@ export default function HomePage() {
     ? Math.ceil((new Date(nextTappa.data).getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
     : null
 
-  useEffect(() => {
-    const reveals = document.querySelectorAll<HTMLElement>(`.${styles.reveal}`)
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add(styles.visible)
-            observer.unobserve(e.target)
-          }
-        })
-      },
-      { threshold: 0.12 }
-    )
-    reveals.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+  const randomPhoto = photosJson[Math.floor(Math.random() * photosJson.length)]
 
   return (
     <>
+      <ScrollReveal />
+
       {/* NAV */}
       <nav className={styles.nav}>
         <div className={styles.navLogo}>
@@ -63,19 +51,14 @@ export default function HomePage() {
       <section className={styles.hero}>
         <div className={styles.heroDiagonal} />
         <div className={styles.heroGreenStripe} />
-        <div className={styles.heroFrog}>
-          <svg width="420" height="420" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="30" cy="36" rx="18" ry="14" fill="#4a9a3f"/>
-            <circle cx="20" cy="20" r="9" fill="#4a9a3f"/>
-            <circle cx="40" cy="20" r="9" fill="#4a9a3f"/>
-            <circle cx="20" cy="19" r="5" fill="white"/>
-            <circle cx="40" cy="19" r="5" fill="white"/>
-            <circle cx="21" cy="19" r="3" fill="#111"/>
-            <circle cx="41" cy="19" r="3" fill="#111"/>
-            <path d="M22 42 Q30 49 38 42" stroke="#1a4f8a" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-            <path d="M13 44 L5 52 L10 54" stroke="#4a9a3f" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-            <path d="M47 44 L55 52 L50 54" stroke="#4a9a3f" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-          </svg>
+        <div className={styles.heroImageWrap}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`/gallery/${encodeURIComponent(randomPhoto.src)}`}
+            alt={randomPhoto.caption}
+            className={styles.heroImage}
+          />
+          <div className={styles.heroImageOverlay} />
         </div>
         <div className={styles.heroContent}>
           <p className={styles.heroEyebrow}>A.S.D. Sesia Running Vercelli</p>
