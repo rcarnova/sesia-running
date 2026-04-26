@@ -1,10 +1,18 @@
 // src/app/api/classifica/route.ts
 import { NextResponse } from 'next/server'
-import { readClassifica } from '@/lib/store'
+import { fetchClassificaFromDrive } from '@/lib/store'
 
 export const dynamic = 'force-dynamic'
 
 export async function GET() {
-  const data = readClassifica()
-  return NextResponse.json(data)
+  try {
+    const data = await fetchClassificaFromDrive()
+    return NextResponse.json(data)
+  } catch (err) {
+    console.error('Drive fetch error:', err)
+    return NextResponse.json(
+      { error: 'Impossibile caricare la classifica' },
+      { status: 500 }
+    )
+  }
 }

@@ -1,7 +1,7 @@
 // src/app/admin/page.tsx
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import headerStyles from '../page.module.css'
@@ -9,54 +9,21 @@ import styles from './admin.module.css'
 
 const ADMIN_SECRET = process.env.NEXT_PUBLIC_ADMIN_SECRET ?? ''
 
-type UploadState = 'idle' | 'loading' | 'success' | 'error'
-
-function todayIso() {
-  return new Date().toISOString().slice(0, 10)
-}
-
-function formatItalianDate(iso: string) {
-  const [y, m, d] = iso.split('-')
-  return `${d}/${m}/${y}`
-}
+type RevalState = 'idle' | 'loading' | 'success' | 'error'
 
 export default function AdminPage() {
-  const [dragOver, setDragOver] = useState(false)
-  const [file, setFile] = useState<File | null>(null)
-  const [state, setState] = useState<UploadState>('idle')
-  const [result, setResult] = useState<{ atletiImportati?: number; aggiornatoIl?: string; error?: string } | null>(null)
-  const [dataClassifica, setDataClassifica] = useState(todayIso)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const [revalState, setRevalState] = useState<RevalState>('idle')
 
-  function handleFileSelect(f: File) {
-    setFile(f)
-    setState('idle')
-    setResult(null)
-  }
-
-  async function handleUpload() {
-    if (!file) return
-    setState('loading')
-    const fd = new FormData()
-    fd.append('file', file)
-    fd.append('dataClassifica', formatItalianDate(dataClassifica))
+  async function handleRevalidate() {
+    setRevalState('loading')
     try {
-      const res = await fetch('/api/upload', {
+      const res = await fetch('/api/revalidate', {
         method: 'POST',
         headers: { 'x-admin-secret': ADMIN_SECRET },
-        body: fd,
       })
-      const json = await res.json()
-      if (res.ok) {
-        setState('success')
-        setResult(json)
-      } else {
-        setState('error')
-        setResult(json)
-      }
+      setRevalState(res.ok ? 'success' : 'error')
     } catch {
-      setState('error')
-      setResult({ error: 'Errore di rete' })
+      setRevalState('error')
     }
   }
 
@@ -84,73 +51,31 @@ export default function AdminPage() {
       <div className={styles.content}>
 
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Carica nuova classifica</h2>
-          <p className={styles.hint}>
-            Il file Excel deve avere le colonne: <code>Nome</code>, <code>Punti</code>, <code>Numero Gare</code>, <code>Numero Ritrovi</code>
-          </p>
-
-          <div
-            className={`${styles.dropZone} ${dragOver ? styles.dragOver : ''}`}
-            onClick={() => inputRef.current?.click()}
-            onDragOver={(e) => { e.preventDefault(); setDragOver(true) }}
-            onDragLeave={() => setDragOver(false)}
-            onDrop={(e) => {
-              e.preventDefault()
-              setDragOver(false)
-              const f = e.dataTransfer.files[0]
-              if (f) handleFileSelect(f)
-            }}
-          >
-            <div className={styles.dropIcon}>↑</div>
-            <div className={styles.dropText}>
-              {file ? file.name : 'Trascina il file .xlsx qui, oppure clicca per selezionarlo'}
-            </div>
-            {file && <div className={styles.dropSub}>{(file.size / 1024).toFixed(1)} KB</div>}
+          <h2 className={styles.sectionTitle}>Aggiornamento classifica</h2>
+          <div className={styles.driveInfo}>
+            <p>La classifica viene caricata automaticamente da Google Drive.</p>
+            <p>
+              Per aggiornare: modifica il file Excel su Google Drive e attendi massimo 1 ora,
+              oppure forza il refresh qui sotto.
+            </p>
           </div>
 
-          <div className={styles.dateField}>
-            <label className={styles.dateLabel} htmlFor="dataClassifica">
-              Data classifica
-            </label>
-            <input
-              id="dataClassifica"
-              type="date"
-              className={styles.dateInput}
-              value={dataClassifica}
-              onChange={(e) => setDataClassifica(e.target.value)}
-            />
-          </div>
-
-          <input
-            ref={inputRef}
-            type="file"
-            accept=".xlsx,.xls,.csv"
-            style={{ display: 'none' }}
-            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileSelect(f) }}
-          />
-
-          {state === 'success' && result && (
-            <div className={styles.alertSuccess}>
-              ✓ Classifica pubblicata — {result.atletiImportati} atleti importati ({result.aggiornatoIl})
-            </div>
+          {revalState === 'success' && (
+            <div className={styles.alertSuccess}>✓ Classifica aggiornata!</div>
           )}
-          {state === 'error' && result && (
-            <div className={styles.alertError}>✗ {result.error}</div>
+          {revalState === 'error' && (
+            <div className={styles.alertError}>✗ Errore durante l&apos;aggiornamento</div>
           )}
 
           <div className={styles.actions}>
             <button
               className={styles.btnPrimary}
-              onClick={handleUpload}
-              disabled={!file || state === 'loading'}
+              onClick={handleRevalidate}
+              disabled={revalState === 'loading'}
             >
-              {state === 'loading' ? 'Pubblicazione…' : 'Pubblica classifica'}
+              {revalState === 'loading' ? 'Aggiornamento…' : 'Forza aggiornamento'}
             </button>
-            <a
-              href="/template_classifica.xlsx"
-              className={styles.btnSecondary}
-              download
-            >
+            <a href="/template_classifica.xlsx" className={styles.btnSecondary} download>
               Scarica template .xlsx
             </a>
           </div>
@@ -182,10 +107,10 @@ export default function AdminPage() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Note tecniche</h2>
           <ul className={styles.noteList}>
-            <li>La classifica viene salvata in <code>data/classifica.json</code> nel repository.</li>
-            <li>Per produzione con persistenza permanente: connettere Supabase e aggiornare <code>src/lib/store.ts</code>.</li>
+            <li>La classifica viene letta dal file Excel su Google Drive ogni ora (cache TTL 3600s).</li>
+            <li>Il file deve avere le colonne: <code>Nome</code>, <code>Punti</code>, <code>Numero Gare</code>, <code>Numero Ritrovi</code>.</li>
             <li>L&apos;accesso admin è protetto dalla variabile d&apos;ambiente <code>ADMIN_SECRET</code> da impostare su Vercel.</li>
-            <li>Gare FIDAL non sono conteggiate secondo il regolamento UISP.</li>
+            <li>L&apos;ID del file Google Drive si imposta nella variabile <code>GOOGLE_DRIVE_FILE_ID</code> su Vercel.</li>
           </ul>
         </section>
 

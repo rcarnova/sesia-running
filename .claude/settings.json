@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m ' *)",
+      "Skill(claude-api)",
+      "Skill(claude-api:*)",
+      "Bash(curl -sL \"https://api.anthropic.com/v1/design/h/ZYcrKVlPoCbxNFGMW5Z4VA?open_file=index.html\")",
+      "Bash(gunzip)",
+      "Bash(curl -sL \"https://api.anthropic.com/v1/design/h/ZYcrKVlPoCbxNFGMW5Z4VA\")",
+      "Bash(curl -v \"https://api.anthropic.com/v1/design/h/ZYcrKVlPoCbxNFGMW5Z4VA?open_file=index.html\")",
+      "Bash(npx next *)",
+      "Bash(node_modules/.bin/next build *)",
+      "Bash(npm run *)",
+      "Bash(npm install *)",
+      "Bash(git -C /Users/rosariocarnovale/Desktop/sesia-running status)",
+      "Bash(git -C /Users/rosariocarnovale/Desktop/sesia-running log --oneline -5)",
+      "Bash(git -C /Users/rosariocarnovale/Desktop/sesia-running add src/app/page.tsx src/app/home.module.css src/app/classifica/ src/app/admin/page.tsx src/app/regole/page.tsx src/app/statuto/page.tsx next-env.d.ts package-lock.json)",
+      "Bash(git -C /Users/rosariocarnovale/Desktop/sesia-running commit -m ' *)",
+      "Bash(git -C /Users/rosariocarnovale/Desktop/sesia-running push origin main)",
+      "Bash(git -C /Users/rosariocarnovale/Desktop/sesia-running add src/app/gallery/ src/app/page.tsx src/app/classifica/page.tsx src/app/regole/page.tsx src/app/statuto/page.tsx src/app/admin/page.tsx public/gallery/.gitkeep)",
+      "Bash(git -C /Users/rosariocarnovale/Desktop/sesia-running add src/app/gallery/page.tsx src/app/gallery/gallery.module.css)",
+      "Bash(git -C /Users/rosariocarnovale/Desktop/sesia-running log --oneline -3)",
+      "Bash(git -C /Users/rosariocarnovale/Desktop/sesia-running add \"public/gallery/\")",
+      "Bash(node_modules/.bin/next --version)",
+      "Bash(git -C /Users/rosariocarnovale/Desktop/sesia-running add package.json package-lock.json tsconfig.json next-env.d.ts \"public/gallery/Al giro del lago di Viverone domenica 26 aprile 2026.JPG\")"
+    ]
+  }
+}
