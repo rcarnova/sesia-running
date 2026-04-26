@@ -1,11 +1,12 @@
 // src/app/admin/page.tsx
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import headerStyles from '../page.module.css'
 import styles from './admin.module.css'
+import { Classifica } from '@/lib/types'
 
 const ADMIN_SECRET = process.env.NEXT_PUBLIC_ADMIN_SECRET ?? ''
 
@@ -13,6 +14,13 @@ type RevalState = 'idle' | 'loading' | 'success' | 'error'
 
 export default function AdminPage() {
   const [revalState, setRevalState] = useState<RevalState>('idle')
+  const [classifica, setClassifica] = useState<Classifica | null>(null)
+
+  useEffect(() => {
+    fetch('/api/classifica')
+      .then((r) => r.json())
+      .then((json) => { if (json?.atleti) setClassifica(json) })
+  }, [])
 
   async function handleRevalidate() {
     setRevalState('loading')
@@ -22,10 +30,25 @@ export default function AdminPage() {
         headers: { 'x-admin-secret': ADMIN_SECRET },
       })
       setRevalState(res.ok ? 'success' : 'error')
+      if (res.ok) {
+        const updated = await fetch('/api/classifica').then((r) => r.json())
+        if (updated?.atleti) setClassifica(updated)
+      }
     } catch {
       setRevalState('error')
     }
   }
+
+  const stats = classifica ? {
+    gratuiti: classifica.atleti.filter((a) => a.punti >= 60).length,
+    mediaPunti: classifica.atleti.length
+      ? Math.round(classifica.atleti.reduce((s, a) => s + a.punti, 0) / classifica.atleti.length)
+      : 0,
+    piuAttivo: classifica.atleti.reduce(
+      (best, a) => (a.gare + a.ritrovi > best.gare + best.ritrovi ? a : best),
+      classifica.atleti[0]
+    ),
+  } : null
 
   return (
     <div className={headerStyles.wrapper}>
@@ -50,15 +73,31 @@ export default function AdminPage() {
 
       <div className={styles.content}>
 
+        {stats && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>Stats rapide</h2>
+            <table className={styles.historyTable}>
+              <tbody>
+                <tr>
+                  <td>Atleti con ≥ 60 punti (tessera gratuita)</td>
+                  <td className={styles.statusOk}>{stats.gratuiti}</td>
+                </tr>
+                <tr>
+                  <td>Media punti per atleta</td>
+                  <td>{stats.mediaPunti}</td>
+                </tr>
+                <tr>
+                  <td>Atleta più attivo (gare + ritrovi)</td>
+                  <td>{stats.piuAttivo?.nome ?? '—'}</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        )}
+
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Aggiornamento classifica</h2>
-          <div className={styles.driveInfo}>
-            <p>La classifica viene caricata automaticamente da Google Drive.</p>
-            <p>
-              Per aggiornare: modifica il file Excel su Google Drive e attendi massimo 1 ora,
-              oppure forza il refresh qui sotto.
-            </p>
-          </div>
+          <h2 className={styles.sectionTitle}>Aggiorna classifica da Google Drive</h2>
+          <p className={styles.hint}>Forza il refresh immediato senza aspettare l&apos;ora</p>
 
           {revalState === 'success' && (
             <div className={styles.alertSuccess}>✓ Classifica aggiornata!</div>
@@ -73,45 +112,9 @@ export default function AdminPage() {
               onClick={handleRevalidate}
               disabled={revalState === 'loading'}
             >
-              {revalState === 'loading' ? 'Aggiornamento…' : 'Forza aggiornamento'}
+              {revalState === 'loading' ? 'Aggiornamento…' : 'Aggiorna classifica da Google Drive'}
             </button>
-            <a href="/template_classifica.xlsx" className={styles.btnSecondary} download>
-              Scarica template .xlsx
-            </a>
           </div>
-        </section>
-
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Storico aggiornamenti</h2>
-          <table className={styles.historyTable}>
-            <tbody>
-              <tr>
-                <td>01/03/2026</td>
-                <td>Classifica_Sesia_Running_01_03_26.xlsx</td>
-                <td className={styles.statusOk}>Pubblicata</td>
-              </tr>
-              <tr>
-                <td>15/01/2026</td>
-                <td>Classifica_Sesia_Running_15_01_26.xlsx</td>
-                <td className={styles.statusOk}>Pubblicata</td>
-              </tr>
-              <tr>
-                <td>10/11/2025</td>
-                <td>Classifica_Sesia_Running_10_11_25.xlsx</td>
-                <td className={styles.statusOk}>Pubblicata</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Note tecniche</h2>
-          <ul className={styles.noteList}>
-            <li>La classifica viene letta dal file Excel su Google Drive ogni ora (cache TTL 3600s).</li>
-            <li>Il file deve avere le colonne: <code>Nome</code>, <code>Punti</code>, <code>Numero Gare</code>, <code>Numero Ritrovi</code>.</li>
-            <li>L&apos;accesso admin è protetto dalla variabile d&apos;ambiente <code>ADMIN_SECRET</code> da impostare su Vercel.</li>
-            <li>L&apos;ID del file Google Drive si imposta nella variabile <code>GOOGLE_DRIVE_FILE_ID</code> su Vercel.</li>
-          </ul>
         </section>
 
       </div>
