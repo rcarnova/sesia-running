@@ -64,7 +64,7 @@ export default function HomePage() {
           <h1 className={styles.heroHeadline}>
             <span>CORRI.</span>
             <span>SUDA.</span>
-            <span className={styles.wordVinci}>VINCI.</span>
+            <span className={styles.wordVinci}>DIVERTITI!</span>
           </h1>
           <p className={styles.heroSub}>A.S.D. Sesia Running Vercelli — dal 2000</p>
           <a href="#iscriviti" className={styles.btnCta}>VIENI A CORRERE CON NOI →</a>
