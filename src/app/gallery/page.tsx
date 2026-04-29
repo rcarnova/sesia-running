@@ -1,16 +1,45 @@
 // src/app/gallery/page.tsx
+import fs from 'fs'
+import path from 'path'
 import Image from 'next/image'
 import Link from 'next/link'
 import headerStyles from '../page.module.css'
 import styles from './gallery.module.css'
 import GalleryClient from './GalleryClient'
-import photosConfig from '../../../public/gallery/photos.json'
 
 function getGalleryPhotos() {
-  return photosConfig.map((p) => ({
-    src: `/gallery/${encodeURIComponent(p.src)}`,
-    alt: p.caption,
-  }))
+  const galleryDir = path.join(process.cwd(), 'public', 'gallery')
+  const photos: { src: string; alt: string }[] = []
+
+  const years = fs.readdirSync(galleryDir)
+    .filter(f => /^\d{4}$/.test(f))
+    .sort((a, b) => b.localeCompare(a))
+
+  for (const year of years) {
+    const yearDir = path.join(galleryDir, year)
+    const months = fs.readdirSync(yearDir)
+      .filter(f => /^\d{2}$/.test(f))
+      .sort((a, b) => b.localeCompare(a))
+
+    for (const month of months) {
+      const monthDir = path.join(yearDir, month)
+      const files = fs.readdirSync(monthDir)
+        .filter(f => /\.(jpg|jpeg|png|webp|heic)$/i.test(f))
+        .sort((a, b) => a.localeCompare(b))
+
+      for (const filename of files) {
+        photos.push({
+          src: `/gallery/${year}/${month}/${encodeURIComponent(filename)}`,
+          alt: filename
+            .replace(/\.(jpg|jpeg|png|webp|heic)$/i, '')
+            .replace(/[-_]/g, ' ')
+            .replace(/\b\w/g, c => c.toUpperCase()),
+        })
+      }
+    }
+  }
+
+  return photos
 }
 
 export default function GalleryPage() {

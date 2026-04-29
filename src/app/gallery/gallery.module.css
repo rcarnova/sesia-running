@@ -24,6 +24,19 @@
 }
 
 /* ── MASONRY GRID ── */
+.monthLabel {
+  column-span: all;
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sr-blue);
+  padding: 24px 0 10px;
+  border-bottom: 2px solid var(--sr-green);
+  margin-bottom: 12px;
+  width: 100%;
+}
+
 .grid {
   padding: 20px;
   column-count: 3;
