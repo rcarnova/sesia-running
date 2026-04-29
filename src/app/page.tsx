@@ -1,9 +1,10 @@
 // src/app/page.tsx
+import fs from 'fs'
+import path from 'path'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './home.module.css'
 import ScrollReveal from './ScrollReveal'
-import photosJson from '../../public/gallery/photos.json'
 
 export const dynamic = 'force-dynamic'
 
@@ -24,7 +25,16 @@ export default function HomePage() {
     ? Math.ceil((new Date(nextTappa.data).getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
     : null
 
-  const randomPhoto = photosJson[Math.floor(Math.random() * photosJson.length)]
+  const galleryDir = path.join(process.cwd(), 'public', 'gallery')
+  const allPhotos: string[] = []
+  for (const year of fs.readdirSync(galleryDir).filter(f => /^\d{4}$/.test(f))) {
+    for (const month of fs.readdirSync(path.join(galleryDir, year)).filter(f => /^\d{2}$/.test(f))) {
+      for (const file of fs.readdirSync(path.join(galleryDir, year, month)).filter(f => /\.(jpg|jpeg|png|webp|heic)$/i.test(f))) {
+        allPhotos.push(`/gallery/${year}/${month}/${encodeURIComponent(file)}`)
+      }
+    }
+  }
+  const randomPhotoSrc = allPhotos[Math.floor(Math.random() * allPhotos.length)] ?? '/logo.png'
 
   return (
     <>
@@ -53,8 +63,8 @@ export default function HomePage() {
         <div className={styles.heroImageWrap}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`/gallery/${encodeURIComponent(randomPhoto.src)}`}
-            alt={randomPhoto.caption}
+            src={randomPhotoSrc}
+            alt=""
             className={styles.heroImage}
           />
           <div className={styles.heroImageOverlay} />
