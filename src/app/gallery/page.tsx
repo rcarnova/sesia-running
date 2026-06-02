@@ -33,7 +33,12 @@ function getGalleryPhotos() {
           alt: filename
             .replace(/\.(jpg|jpeg|png|webp|heic)$/i, '')
             .replace(/[-_]/g, ' ')
-            .replace(/\b\w/g, c => c.toUpperCase()),
+            .replace(/\b\w+/g, (word, offset) => {
+              const lower = word.toLowerCase()
+              const stopWords = new Set(['e', 'ed', 'di', 'da', 'del', 'della', 'dei', 'degli', 'delle', 'con', 'per', 'tra', 'fra', 'il', 'lo', 'la', 'i', 'gli', 'le'])
+              if (offset > 0 && stopWords.has(lower)) return lower
+              return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+            }),
         })
       }
     }
