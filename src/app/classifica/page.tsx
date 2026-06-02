@@ -50,7 +50,7 @@ export default function ClassificaPage() {
       atleti: data.atleti.length,
       gare: data.atleti.reduce((s, a) => s + a.gare, 0),
       ritrovi: data.atleti.reduce((s, a) => s + a.ritrovi, 0),
-      gratuiti: data.atleti.filter((a) => a.punti >= 60).length,
+      gratuiti: data.atleti.filter((a) => a.punti >= 100).length,
     }
   }, [data])
 
@@ -127,13 +127,13 @@ export default function ClassificaPage() {
                 <th className={styles.thCenter}>Punti</th>
                 <th className={styles.thCenter}>Gare</th>
                 <th className={styles.thCenter}>Ritrovi</th>
-                <th className={styles.thBar}>Verso 60 Pt</th>
+                <th className={styles.thBar}>Verso 100 Pt</th>
               </tr>
             </thead>
             <tbody>
               {slice.map((atleta) => {
                 const rank = rankMap.get(atleta.nome) ?? 0
-                const pct = Math.min(100, Math.round((atleta.punti / 60) * 100))
+                const pct = Math.min(100, Math.round((atleta.punti / 100) * 100))
                 return (
                   <tr key={atleta.nome} className={styles.row}>
                     <td className={styles.tdRank}>
@@ -141,7 +141,7 @@ export default function ClassificaPage() {
                     </td>
                     <td className={styles.tdName}>
                       {atleta.nome}
-                      {atleta.punti >= 60 && (
+                      {atleta.punti >= 100 && (
                         <span className={styles.freeBadge}>gratuito</span>
                       )}
                     </td>
@@ -153,7 +153,7 @@ export default function ClassificaPage() {
                         <div
                           className={styles.barFill}
                           style={{ width: `${pct}%` }}
-                          data-full={atleta.punti >= 60 ? 'true' : undefined}
+                          data-full={atleta.punti >= 100 ? 'true' : undefined}
                         />
                       </div>
                     </td>

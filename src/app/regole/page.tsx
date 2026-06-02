@@ -75,9 +75,9 @@ export default function RegolePage() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Premio stagionale</h2>
           <div className={styles.rewardCard}>
-            <div className={styles.rewardPts}>60 punti</div>
+            <div className={styles.rewardPts}>100 punti</div>
             <div className={styles.rewardText}>
-              Chi raggiunge 60 punti ottiene il <strong>tesseramento gratuito</strong> per la stagione successiva.
+              Chi raggiunge 100 punti ottiene il <strong>tesseramento gratuito</strong> per la stagione successiva.
               Le gare corse con tessera FIDAL non sono conteggiate.
             </div>
           </div>

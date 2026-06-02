@@ -40,7 +40,7 @@ export default function AdminPage() {
   }
 
   const stats = classifica ? {
-    gratuiti: classifica.atleti.filter((a) => a.punti >= 60).length,
+    gratuiti: classifica.atleti.filter((a) => a.punti >= 100).length,
     mediaPunti: classifica.atleti.length
       ? Math.round(classifica.atleti.reduce((s, a) => s + a.punti, 0) / classifica.atleti.length)
       : 0,
@@ -79,7 +79,7 @@ export default function AdminPage() {
             <table className={styles.historyTable}>
               <tbody>
                 <tr>
-                  <td>Atleti con ≥ 60 punti (tessera gratuita)</td>
+                  <td>Atleti con ≥ 100 punti (tessera gratuita)</td>
                   <td className={styles.statusOk}>{stats.gratuiti}</td>
                 </tr>
                 <tr>

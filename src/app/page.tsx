@@ -76,7 +76,7 @@ export default function HomePage() {
             <span>SUDA.</span>
             <span className={styles.wordVinci}>DIVERTITI!</span>
           </h1>
-          <p className={styles.heroSub}>A.S.D. Sesia Running Vercelli — dal 2000</p>
+          <p className={styles.heroSub}>A.S.D. Sesia Running Vercelli — dal 2005</p>
           <a href="#iscriviti" className={styles.btnCta}>VIENI A CORRERE CON NOI →</a>
         </div>
         <div className={styles.heroSideText}>VERCELLI · PIEMONTE · ITALIA</div>
@@ -101,11 +101,11 @@ export default function HomePage() {
         <div className={styles.chiSiamoGrid}>
           <div className={styles.reveal}>
             <div className={styles.statHero}>
-              <div className={styles.statBigNum}>96</div>
+              <div className={styles.statBigNum}>98</div>
               <div className={styles.statBigLabel}>TESSERATI</div>
             </div>
             <p className={styles.chiSiamoText}>
-              Siamo una società sportiva dilettantistica affiliata UISP, nata a Vercelli nell&apos;ottobre 2000.
+              Siamo una società sportiva dilettantistica affiliata UISP, nata a Vercelli nel 2005.
               Organizziamo gare, ritrovi mensili di gruppo e promuoviamo la pratica del podismo per tutti i livelli.
               Nessun obbligo di gare minime — solo la voglia di correre insieme.
             </p>
@@ -120,7 +120,7 @@ export default function HomePage() {
               <div className={styles.statCardLabel}>Ritrovo al mese</div>
             </div>
             <div className={styles.statCard}>
-              <div className={styles.statCardNum}>2000</div>
+              <div className={styles.statCardNum}>2005</div>
               <div className={styles.statCardLabel}>Anno di fondazione</div>
             </div>
           </div>
