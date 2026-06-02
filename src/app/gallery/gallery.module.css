@@ -184,8 +184,17 @@
   .heroTitle { font-size: 26px; }
   .prevBtn, .nextBtn { font-size: 36px; padding: 8px 12px; }
   .lightboxImg { max-height: 78vh; }
+  .monthLabel {
+    display: block;
+    column-span: all;
+    width: 100%;
+    font-size: 18px;
+    letter-spacing: 2px;
+    padding: 18px 0 8px;
+  }
 }
 
 @media (max-width: 480px) {
   .grid { column-count: 1; }
+  .monthLabel { font-size: 16px; letter-spacing: 1.5px; }
 }
