@@ -184,6 +184,7 @@
   .heroTitle { font-size: 26px; }
   .prevBtn, .nextBtn { font-size: 36px; padding: 8px 12px; }
   .lightboxImg { max-height: 78vh; }
+  .caption { opacity: 1; font-size: 11px; padding: 16px 6px 6px; }
   .monthLabel {
     display: block;
     column-span: all;
