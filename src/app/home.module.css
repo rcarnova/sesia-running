@@ -541,8 +541,8 @@
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
-  .nav { padding: 12px 20px; }
-  .navLinks { gap: 12px; }
+  .nav { padding: 12px 20px; flex-wrap: wrap; row-gap: 8px; }
+  .navLinks { gap: 6px 12px; flex-wrap: wrap; }
   .navLink { font-size: 13px; letter-spacing: 0.05em; }
 
   .heroContent { padding: 80px 24px 0; }
@@ -558,6 +558,10 @@
   .cosaOttieni { padding: 28px 24px; }
 
   .classificaTeaser { padding: 60px 24px; }
+
+  .manifestoBar { flex-direction: column; }
+  .manifestoItem { padding: 18px 16px; }
+  .manifestoItem + .manifestoItem::before { left: 20%; right: 20%; top: 0; bottom: auto; width: auto; height: 3px; }
 }
 
 @media (max-width: 480px) {
