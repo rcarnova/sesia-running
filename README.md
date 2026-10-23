@@ -55,3 +55,17 @@ Il parser riconosce varianti delle intestazioni (es. `nome`, `Nome`, `punti`, `P
 - [ ] Sezione eventi/calendario gare
 - [ ] Pagina singolo atleta con storico personale
 - [ ] Versione mobile ottimizzata
+
+## Aggiornare la galleria dalla chat WhatsApp
+
+1. Da WhatsApp: chat del gruppo → Esporta chat → **Includi media**. Estrai lo zip in una cartella.
+2. Crea il foglio delle foto dal giorno indicato in poi:
+   ```bash
+   node scripts/importa-whatsapp.mjs prepara "/percorso/cartella export" --da 2026-11-01
+   ```
+3. Apri `import-galleria.csv`: scrivi `si` nella colonna **tieni** per le foto da pubblicare e correggi la **didascalia** (diventa il testo sotto la foto). Lascia vuoti volantini, screenshot e doppioni.
+4. Importa: le foto vengono ridimensionate a 1600 px e salvate in `public/gallery/AAAA/MM/`.
+   ```bash
+   node scripts/importa-whatsapp.mjs importa "/percorso/cartella export"
+   ```
+5. Commit e push: Vercel pubblica la galleria aggiornata.
