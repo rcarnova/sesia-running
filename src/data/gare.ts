@@ -13,6 +13,7 @@ export type Momento = 'mattina' | 'pomeriggio' | 'sera'
 export interface Edizione {
   data: string        // YYYY-MM-DD
   numero?: number     // numero di edizione, se noto
+  confermata?: boolean // edizione futura con data ufficiale (prevale sulla stima)
   nota?: string
 }
 
@@ -188,16 +189,16 @@ export const gare: Gara[] = [
     nota: 'Sconto sulla quota per iscrizioni di società (minimo 11 iscritti).',
   },
   {
-    id: 'mezza-vercelli', nome: 'Mezza Maratona di Vercelli', luogo: 'Vercelli (VC)', organizzatore: 'Circuito Running',
-    tipo: 'strada', distanze: ['21,097 km', '7 km'], momento: 'mattina',
+    id: 'mezza-vercelli', nome: 'Città di Vercelli Half Marathon (VHM)', luogo: 'Vercelli (VC)', organizzatore: 'Circuito Running',
+    tipo: 'strada', distanze: ['21,097 km Fidal Bronze', '21 km EPS non competitiva', '10 km non competitiva'], momento: 'mattina',
     sesia: 'collabora',
-    regola: { k: 'ennesimo', mese: 2, dow: DOM, n: 2 },
+    regola: { k: 'variabile' },
     edizioni: [
       { data: '2025-02-09', nota: 'Sesia Running 3° gruppo più numeroso, volontari ai ristori' },
       { data: '2026-02-08', nota: 'Prevista, poi rinviata per iscrizioni insufficienti' },
+      { data: '2027-02-28', confermata: true, nota: 'Data ufficiale. Ritiro pettorali in Sala Borsa, piazza Risorgimento, dalle 7.30 alle 9' },
     ],
-    affidabilita: 'media',
-    nota: 'Arrivo in Piazza Cavour. Dopo il rinvio 2026 la data 2027 è da confermare.',
+    nota: 'Arrivo in Piazza Cavour. Nel 2027 passa a fine febbraio e la distanza corta diventa 10 km.',
   },
   {
     id: 'mezza-trino', nome: 'Mezza Maratona Terre d’Acqua', luogo: 'Trino (VC)', organizzatore: 'GP Trinese',
