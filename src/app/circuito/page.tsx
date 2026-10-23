@@ -167,6 +167,7 @@ export default function CircuitoPage() {
           <Link href="/"          className={headerStyles.navLink}>Home</Link>
           <Link href="/classifica" className={headerStyles.navLink}>Classifica</Link>
           <Link href="/circuito"  className={`${headerStyles.navLink} ${headerStyles.navActive}`}>Circuito</Link>
+          <Link href="/gare" className={headerStyles.navLink}>Gare</Link>
           <Link href="/regole"    className={headerStyles.navLink}>Regole</Link>
           <Link href="/statuto"   className={headerStyles.navLink}>Statuto</Link>
           <Link href="/gallery"   className={headerStyles.navLink}>Galleria</Link>
