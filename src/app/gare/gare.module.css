@@ -64,6 +64,8 @@
 .legendaItem { display: inline-flex; align-items: center; gap: 6px; }
 
 .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; margin-right: 6px; }
+.dot_confermata { background: var(--sr-blue); }
+.ufficiale { color: var(--sr-blue); font-weight: 500; }
 .dot_alta { background: var(--sr-green); }
 .dot_media { background: #e0a526; }
 .dot_bassa { background: #fff; border: 2px solid #b4bfcc; }

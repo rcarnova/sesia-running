@@ -20,6 +20,7 @@ const FILTRI: { id: Filtro; label: string }[] = [
 ]
 
 const AFF_LABEL: Record<Affidabilita, string> = {
+  confermata: 'Data ufficiale',
   alta: 'Data affidabile',
   media: 'Probabile, da confermare',
   bassa: 'Stima su una sola edizione',
@@ -99,7 +100,7 @@ export default function GareClient({ catalogo, anno, oggi }: { catalogo: GaraPre
       {vista === 'calendario' && (
         <>
           <div className={styles.legenda}>
-            {(['alta', 'media', 'bassa'] as Affidabilita[]).map((a) => (
+            {(['confermata', 'alta', 'media', 'bassa'] as Affidabilita[]).map((a) => (
               <span key={a} className={styles.legendaItem}><span className={`${styles.dot} ${styles['dot_' + a]}`} />{AFF_LABEL[a]}</span>
             ))}
           </div>
@@ -127,8 +128,8 @@ export default function GareClient({ catalogo, anno, oggi }: { catalogo: GaraPre
                         <div className={styles.meta}>📍 {g.luogo} · {g.distanze.join(' · ')}</div>
                         <div className={styles.regola}>
                           <span className={`${styles.dot} ${styles['dot_' + g.affidabilitaCalcolata]}`} title={AFF_LABEL[g.affidabilitaCalcolata]} />
-                          {g.regolaTesto}
-                          {g.edizioni.length > 0 && <span className={styles.storico}>{' · '}ultima edizione {formattaData(g.ultimaEdizione)}</span>}
+                          {g.affidabilitaCalcolata === 'confermata' ? <strong className={styles.ufficiale}>Data ufficiale</strong> : g.regolaTesto}
+                          {g.ultimaEdizione && <span className={styles.storico}>{' · '}ultima edizione {formattaData(g.ultimaEdizione)}</span>}
                         </div>
                         {g.avvisi.map((a) => <div key={a} className={styles.avviso}>⚠ {a}</div>)}
                         {g.nota && <div className={styles.nota}>{g.nota}</div>}
@@ -149,7 +150,7 @@ export default function GareClient({ catalogo, anno, oggi }: { catalogo: GaraPre
                     <div className={styles.data}><span className={styles.dataGiorno}>?</span></div>
                     <div className={styles.corpo}>
                       <div className={styles.nomeRiga}><span className={styles.nome}>{g.nome}</span><Badges g={g} /></div>
-                      <div className={styles.meta}>📍 {g.luogo} · ultime edizioni: {g.edizioni.map((e) => formattaData(e.data)).join(', ')}</div>
+                      <div className={styles.meta}>📍 {g.luogo} · ultime edizioni: {g.edizioni.filter((e) => !e.confermata).map((e) => formattaData(e.data)).join(', ')}</div>
                       {g.nota && <div className={styles.nota}>{g.nota}</div>}
                     </div>
                   </li>
@@ -169,7 +170,7 @@ export default function GareClient({ catalogo, anno, oggi }: { catalogo: GaraPre
                 <button className={styles.schedaHead} onClick={() => setAperta(open ? null : g.id)} aria-expanded={open}>
                   <span>
                     <span className={styles.nome}>{g.nome}</span>
-                    <span className={styles.metaInline}>{g.luogo} · {g.edizioni.length} {g.edizioni.length === 1 ? 'edizione' : 'edizioni'} in archivio</span>
+                    <span className={styles.metaInline}>{g.luogo} · {g.disputate} {g.disputate === 1 ? 'edizione' : 'edizioni'} in archivio</span>
                   </span>
                   <span className={styles.chev}>{open ? '▴' : '▾'}</span>
                 </button>
@@ -179,13 +180,13 @@ export default function GareClient({ catalogo, anno, oggi }: { catalogo: GaraPre
                     <dl className={styles.dl}>
                       {g.organizzatore && (<><dt>Organizza</dt><dd>{g.organizzatore}</dd></>)}
                       <dt>Distanze</dt><dd>{g.distanze.join(' · ')}</dd>
-                      <dt>Quando</dt><dd>{g.regolaTesto}, {g.momento}</dd>
+                      <dt>Quando</dt><dd>{g.regola.k === 'variabile' ? 'data comunicata di anno in anno' : g.regolaTesto}, {g.momento}</dd>
                       {g.previsione && (<><dt>Nel {anno}</dt><dd>{formattaData(g.previsione)} <span className={styles.storico}>({AFF_LABEL[g.affidabilitaCalcolata].toLowerCase()})</span></dd></>)}
                     </dl>
                     <ol className={styles.edizioni}>
                       {[...g.edizioni].sort((a, b) => b.data.localeCompare(a.data)).map((e) => (
                         <li key={e.data}>
-                          <strong>{formattaData(e.data)}</strong>{e.numero ? ` · ${e.numero}ª edizione` : ''}
+                          <strong>{formattaData(e.data)}</strong>{e.numero ? ` · ${e.numero}ª edizione` : ''}{e.confermata ? ' · in programma' : ''}
                           {e.nota && <span className={styles.storico}> · {e.nota}</span>}
                         </li>
                       ))}
