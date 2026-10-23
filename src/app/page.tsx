@@ -50,7 +50,6 @@ export default function HomePage() {
           <li><Link href="/" className={`${styles.navLink} ${styles.navActive}`}>HOME</Link></li>
           <li><Link href="/classifica" className={styles.navLink}>CLASSIFICA</Link></li>
           <li><Link href="/circuito"   className={styles.navLink}>CIRCUITO</Link></li>
-          <li><Link href="/gare" className={styles.navLink}>GARE</Link></li>
           <li><Link href="/regole" className={styles.navLink}>REGOLE</Link></li>
           <li><Link href="/statuto" className={styles.navLink}>STATUTO</Link></li>
           <li><Link href="/gallery" className={styles.navLink}>GALLERIA</Link></li>
