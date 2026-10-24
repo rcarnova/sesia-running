@@ -12,6 +12,8 @@ export const revalidate = 86400
 export const metadata: Metadata = {
   title: 'Gare e calendario | Sesia Running Vercelli',
   description: 'Le gare che Sesia Running corre ogni anno e il calendario previsto per la prossima stagione.',
+  // Pagina in revisione: raggiungibile da link diretto, fuori dal menu e dai motori di ricerca.
+  robots: { index: false, follow: false },
 }
 
 // La stagione sociale parte il 1° novembre: da ottobre in poi si programma già l'anno successivo.
@@ -39,7 +41,6 @@ export default function GarePage() {
           <Link href="/" className={headerStyles.navLink}>Home</Link>
           <Link href="/classifica" className={headerStyles.navLink}>Classifica</Link>
           <Link href="/circuito" className={headerStyles.navLink}>Circuito</Link>
-          <Link href="/gare" className={`${headerStyles.navLink} ${headerStyles.navActive}`}>Gare</Link>
           <Link href="/regole" className={headerStyles.navLink}>Regole</Link>
           <Link href="/statuto" className={headerStyles.navLink}>Statuto</Link>
           <Link href="/gallery" className={headerStyles.navLink}>Galleria</Link>
