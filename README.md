@@ -59,9 +59,9 @@ Il parser riconosce varianti delle intestazioni (es. `nome`, `Nome`, `punti`, `P
 ## Aggiornare la galleria dalla chat WhatsApp
 
 1. Da WhatsApp: chat del gruppo → Esporta chat → **Includi media**. Estrai lo zip in una cartella.
-2. Crea il foglio delle foto dal giorno indicato in poi:
+2. Crea il foglio delle foto nuove (riparte da solo dopo l’ultimo import, oppure usa --da AAAA-MM-GG):
    ```bash
-   node scripts/importa-whatsapp.mjs prepara "/percorso/cartella export" --da 2026-11-01
+   node scripts/importa-whatsapp.mjs prepara "/percorso/cartella export"
    ```
 3. Apri `import-galleria.csv`: scrivi `si` nella colonna **tieni** per le foto da pubblicare e correggi la **didascalia** (diventa il testo sotto la foto). Lascia vuoti volantini, screenshot e doppioni.
 4. Importa: le foto vengono ridimensionate a 1600 px e salvate in `public/gallery/AAAA/MM/`.

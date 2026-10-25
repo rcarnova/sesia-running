@@ -23,6 +23,7 @@ import sharp from 'sharp'
 const [, , comando, cartella, ...resto] = process.argv
 const opz = (nome) => { const i = resto.indexOf(nome); return i >= 0 ? resto[i + 1] : undefined }
 const CSV = 'import-galleria.csv'
+const ULTIMO = path.join('public', 'gallery', '.ultimo-import') // ultima data già esaminata
 const LATO = 1600
 
 if (!comando || !cartella || !['prepara', 'importa'].includes(comando)) {
@@ -73,8 +74,13 @@ const pulisci = (t) => t
   .replace(/[‎⁨⁩]/g, '')
   .replace(/\s+/g, ' ').trim()
 
+const giornoDopo = (d) => new Date(Date.parse(d + 'T12:00:00Z') + 864e5).toISOString().slice(0, 10)
+
 function prepara() {
-  const da = opz('--da') ?? '0000-00-00', a = opz('--a') ?? '9999-12-31'
+  // Senza --da riparte dal giorno dopo l'ultimo import.
+  const ultimo = fs.existsSync(ULTIMO) ? fs.readFileSync(ULTIMO, 'utf8').trim() : null
+  const da = opz('--da') ?? (ultimo ? giornoDopo(ultimo) : '0000-00-00'), a = opz('--a') ?? '9999-12-31'
+  console.log(`Foto dal ${da}${a !== '9999-12-31' ? ` al ${a}` : ''}.`)
   const msg = leggiChat(cartella)
   const righe = []
   msg.forEach((m, i) => {
@@ -115,7 +121,10 @@ async function importa() {
     n++
     console.log(`+ ${anno}/${mese}/${nome}`)
   }
-  console.log(`\n${n} foto importate su ${righe.length}.`)
+  // Segna l'ultima data esaminata (anche delle foto scartate), così il prossimo giro riparte da lì.
+  const max = righe.map((r) => r.data).sort().pop()
+  if (max) fs.writeFileSync(ULTIMO, max + '\n')
+  console.log(`\n${n} foto importate su ${righe.length}. Prossimo import dal ${max ? giornoDopo(max) : '?'}.`)
 }
 
 if (comando === 'prepara') prepara()
