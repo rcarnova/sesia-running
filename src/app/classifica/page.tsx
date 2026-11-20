@@ -6,8 +6,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Classifica, Atleta } from '@/lib/types'
 import styles from '../page.module.css'
+import { SOGLIA_GRATUITO } from '@/lib/stagione'
 
-type SortKey = 'punti' | 'gare' | 'ritrovi' | 'nome'
+type SortKey = 'punti' | 'gare' | 'ritrovi' | 'allenamenti' | 'nome'
 
 const PAGE_SIZE = 25
 
@@ -31,6 +32,7 @@ export default function ClassificaPage() {
     if (sortKey === 'punti') list = [...list].sort((a, b) => b.punti - a.punti)
     else if (sortKey === 'gare') list = [...list].sort((a, b) => b.gare - a.gare)
     else if (sortKey === 'ritrovi') list = [...list].sort((a, b) => b.ritrovi - a.ritrovi)
+    else if (sortKey === 'allenamenti') list = [...list].sort((a, b) => (b.allenamenti ?? 0) - (a.allenamenti ?? 0))
     else list = [...list].sort((a, b) => a.nome.localeCompare(b.nome))
     return list
   }, [data, search, sortKey])
@@ -50,7 +52,7 @@ export default function ClassificaPage() {
       atleti: data.atleti.length,
       gare: data.atleti.reduce((s, a) => s + a.gare, 0),
       ritrovi: data.atleti.reduce((s, a) => s + a.ritrovi, 0),
-      gratuiti: data.atleti.filter((a) => a.punti >= 100).length,
+      gratuiti: data.atleti.filter((a) => a.punti >= SOGLIA_GRATUITO).length,
     }
   }, [data])
 
@@ -67,15 +69,17 @@ export default function ClassificaPage() {
         <nav className={styles.nav}>
           <Link href="/" className={styles.navLink}>Home</Link>
           <Link href="/classifica" className={`${styles.navLink} ${styles.navActive}`}>Classifica</Link>
+          <Link href="/gare" className={styles.navLink}>Gare</Link>
           <Link href="/circuito"   className={styles.navLink}>Circuito</Link>
           <Link href="/regole" className={styles.navLink}>Regole</Link>
+          <Link href="/societa" className={styles.navLink}>Società</Link>
           <Link href="/statuto" className={styles.navLink}>Statuto</Link>
           <Link href="/gallery" className={styles.navLink}>Galleria</Link>
           <Link href="/admin" className={styles.navLink}>Admin</Link>
         </nav>
       </header>
 
-      {stats && (
+      {stats && stats.atleti > 0 && (
         <div className={styles.statsBar}>
           <div className={styles.statCell}>
             <div className={styles.statNum}>{stats.atleti}</div>
@@ -108,9 +112,10 @@ export default function ClassificaPage() {
           <option value="punti">Per punti</option>
           <option value="gare">Per gare</option>
           <option value="ritrovi">Per ritrovi</option>
+          {data?.conAllenamenti && <option value="allenamenti">Per allenamenti</option>}
           <option value="nome">Per nome</option>
         </select>
-        {data && (
+        {data && data.aggiornatoIl && (
           <div className={styles.updateBadge}>Aggiornato {data.aggiornatoIl}</div>
         )}
       </div>
@@ -118,6 +123,12 @@ export default function ClassificaPage() {
       <div className={styles.tableWrap}>
         {!data ? (
           <div className={styles.loading}>Caricamento…</div>
+        ) : data.atleti.length === 0 ? (
+          <div className={styles.loading}>
+            {data.nonDisponibile
+              ? 'Classifica momentaneamente non disponibile, riprova tra poco.'
+              : `La classifica ${data.stagione} parte a breve: i punti compariranno qui dopo i primi ritrovi e le prime gare della stagione.`}
+          </div>
         ) : (
           <table className={styles.table}>
             <thead>
@@ -127,13 +138,14 @@ export default function ClassificaPage() {
                 <th className={styles.thCenter}>Punti</th>
                 <th className={styles.thCenter}>Gare</th>
                 <th className={styles.thCenter}>Ritrovi</th>
-                <th className={styles.thBar}>Verso 100 Pt</th>
+                {data.conAllenamenti && <th className={styles.thCenter}>Allen.</th>}
+                <th className={styles.thBar}>Verso {SOGLIA_GRATUITO} Pt</th>
               </tr>
             </thead>
             <tbody>
               {slice.map((atleta) => {
                 const rank = rankMap.get(atleta.nome) ?? 0
-                const pct = Math.min(100, Math.round((atleta.punti / 100) * 100))
+                const pct = Math.min(100, Math.round((atleta.punti / SOGLIA_GRATUITO) * 100))
                 return (
                   <tr key={atleta.nome} className={styles.row}>
                     <td className={styles.tdRank}>
@@ -141,19 +153,20 @@ export default function ClassificaPage() {
                     </td>
                     <td className={styles.tdName}>
                       {atleta.nome}
-                      {atleta.punti >= 100 && (
+                      {atleta.punti >= SOGLIA_GRATUITO && (
                         <span className={styles.freeBadge}>gratuito</span>
                       )}
                     </td>
                     <td className={styles.tdPts}>{atleta.punti}</td>
                     <td className={styles.tdNum}>{atleta.gare}</td>
                     <td className={styles.tdNum}>{atleta.ritrovi}</td>
+                    {data.conAllenamenti && <td className={styles.tdNum}>{atleta.allenamenti ?? 0}</td>}
                     <td className={styles.tdBar}>
                       <div className={styles.barWrap}>
                         <div
                           className={styles.barFill}
                           style={{ width: `${pct}%` }}
-                          data-full={atleta.punti >= 100 ? 'true' : undefined}
+                          data-full={atleta.punti >= SOGLIA_GRATUITO ? 'true' : undefined}
                         />
                       </div>
                     </td>

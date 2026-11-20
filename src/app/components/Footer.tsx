@@ -11,7 +11,7 @@ export default function Footer() {
       <div className={styles.col}>
         <div className={styles.detail}>📧 asdsesiarunning@libero.it</div>
         <div className={styles.detail}>📞 320 6437356</div>
-        <div className={styles.detail}>Affiliata UISP · Stagione 2025-26</div>
+        <div className={styles.detail}>Affiliata UISP · Stagione 2026-27</div>
       </div>
       <div className={styles.col}>
         <a href="https://www.facebook.com/sesiarunning"

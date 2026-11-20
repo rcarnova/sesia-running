@@ -21,10 +21,10 @@ const FILTRI: { id: Filtro; label: string }[] = [
 
 const AFF_LABEL: Record<Affidabilita, string> = {
   confermata: 'Data ufficiale',
-  alta: 'Data affidabile',
+  alta: 'Periodo affidabile',
   media: 'Probabile, da confermare',
   bassa: 'Stima su una sola edizione',
-  nessuna: 'Data non prevedibile',
+  nessuna: 'Periodo non prevedibile',
 }
 
 const RUOLO: Record<GaraPrevista['sesia'], string | null> = {
@@ -48,12 +48,15 @@ function Badges({ g }: { g: GaraPrevista }) {
   const ruolo = RUOLO[g.sesia]
   return (
     <span className={styles.badges}>
-      {g.circuito === 'CSR' && <span className={`${styles.badge} ${styles.badgeCsr}`}>Circuito Sesia</span>}
       {ruolo && <span className={`${styles.badge} ${styles.badgeRuolo}`}>{ruolo}</span>}
       {g.benefica && <span className={`${styles.badge} ${styles.badgeBenefica}`}>Benefica</span>}
       <span className={styles.badge}>{g.tipo}</span>
     </span>
   )
+}
+
+function momentoTesto(m: GaraPrevista['momento']) {
+  return m === 'sera' ? 'in serata' : m === 'pomeriggio' ? 'di pomeriggio' : 'di mattina'
 }
 
 export default function GareClient({ catalogo, anno, oggi }: { catalogo: GaraPrevista[]; anno: number; oggi: string }) {
@@ -112,13 +115,19 @@ export default function GareClient({ catalogo, anno, oggi }: { catalogo: GaraPre
               <h2 className={styles.meseTitolo}>{nomeMese(mese)}</h2>
               <ul className={styles.lista}>
                 {lista.map((g) => {
-                  const d = new Date(g.previsione! + 'T00:00:00Z')
+                  const ufficiale = g.affidabilitaCalcolata === 'confermata'
                   const passata = g.previsione! < oggi
                   return (
                     <li key={g.id} className={`${styles.riga} ${passata ? styles.passata : ''}`}>
                       <div className={styles.data}>
-                        <span className={styles.dataGiorno}>{d.getUTCDate()}</span>
-                        <span className={styles.dataDow}>{formattaData(g.previsione!, false).slice(0, 3)}</span>
+                        {ufficiale ? (
+                          <>
+                            <span className={styles.dataGiorno}>{Number(g.previsione!.slice(8, 10))}</span>
+                            <span className={styles.dataDow}>{formattaData(g.previsione!, false).slice(0, 3)}</span>
+                          </>
+                        ) : (
+                          <span className={styles.dataDow}>{nomeMese(mese).slice(0, 3)}</span>
+                        )}
                       </div>
                       <div className={styles.corpo}>
                         <div className={styles.nomeRiga}>
@@ -128,10 +137,11 @@ export default function GareClient({ catalogo, anno, oggi }: { catalogo: GaraPre
                         <div className={styles.meta}>📍 {g.luogo} · {g.distanze.join(' · ')}</div>
                         <div className={styles.regola}>
                           <span className={`${styles.dot} ${styles['dot_' + g.affidabilitaCalcolata]}`} title={AFF_LABEL[g.affidabilitaCalcolata]} />
-                          {g.affidabilitaCalcolata === 'confermata' ? <strong className={styles.ufficiale}>Data ufficiale</strong> : g.regolaTesto}
+                          {ufficiale
+                            ? <strong className={styles.ufficiale}>Data ufficiale: {formattaData(g.previsione!)}</strong>
+                            : <>{AFF_LABEL[g.affidabilitaCalcolata]}, {momentoTesto(g.momento)}</>}
                           {g.ultimaEdizione && <span className={styles.storico}>{' · '}ultima edizione {formattaData(g.ultimaEdizione)}</span>}
                         </div>
-                        {g.avvisi.map((a) => <div key={a} className={styles.avviso}>⚠ {a}</div>)}
                         {g.nota && <div className={styles.nota}>{g.nota}</div>}
                       </div>
                     </li>
@@ -180,8 +190,8 @@ export default function GareClient({ catalogo, anno, oggi }: { catalogo: GaraPre
                     <dl className={styles.dl}>
                       {g.organizzatore && (<><dt>Organizza</dt><dd>{g.organizzatore}</dd></>)}
                       <dt>Distanze</dt><dd>{g.distanze.join(' · ')}</dd>
-                      <dt>Quando</dt><dd>{g.regola.k === 'variabile' ? 'data comunicata di anno in anno' : g.regolaTesto}, {g.momento}</dd>
-                      {g.previsione && (<><dt>Nel {anno}</dt><dd>{formattaData(g.previsione)} <span className={styles.storico}>({AFF_LABEL[g.affidabilitaCalcolata].toLowerCase()})</span></dd></>)}
+                      <dt>Quando</dt><dd>{g.regola.k === 'variabile' ? 'data comunicata di anno in anno' : momentoTesto(g.momento)}</dd>
+                      {g.previsione && (<><dt>Nel {anno}</dt><dd>{g.affidabilitaCalcolata === 'confermata' ? formattaData(g.previsione) : `${nomeMese(Number(g.previsione.slice(5, 7)))} ${anno}`} <span className={styles.storico}>({AFF_LABEL[g.affidabilitaCalcolata].toLowerCase()})</span></dd></>)}
                     </dl>
                     <ol className={styles.edizioni}>
                       {[...g.edizioni].sort((a, b) => b.data.localeCompare(a.data)).map((e) => (
@@ -201,7 +211,8 @@ export default function GareClient({ catalogo, anno, oggi }: { catalogo: GaraPre
       )}
 
       <p className={styles.disclaimer}>
-        Le date {anno} sono stime ricavate dalle edizioni passate: fa sempre fede il volantino ufficiale.
+        Il mese indicato per il {anno} è una stima ricavata dalle edizioni passate: il giorno esatto
+        verrà pubblicato quando l&apos;organizzatore lo conferma. Fa sempre fede il volantino ufficiale.
         Conosci una gara che manca o una data già confermata? Scrivi a{' '}
         <a href="mailto:asdsesiarunning@libero.it">asdsesiarunning@libero.it</a>.
       </p>

@@ -8,23 +8,7 @@ import ScrollReveal from './ScrollReveal'
 
 export const dynamic = 'force-dynamic'
 
-const tappe = [
-  { numero: 1, nome: "Vercelli che Corre",    data: "2026-03-29", luogo: "Vercelli (VC)",          ritrovo: "ore 9:00" },
-  { numero: 2, nome: "Rive Run",               data: "2026-05-24", luogo: "Rive (VC)",              ritrovo: "ore 8:30" },
-  { numero: 3, nome: "Prarolo Run",            data: "2026-06-05", luogo: "Prarolo (VC)",           ritrovo: "ore 18:00" },
-  { numero: 4, nome: "Borgo di Notte",         data: "2026-07-07", luogo: "Borgovercelli (VC)",     ritrovo: "ore 18:00" },
-  { numero: 5, nome: "Strapagiun",             data: "2026-08-16", luogo: "Stroppiana (VC)",        ritrovo: "ore 18:00" },
-  { numero: 6, nome: "Corriparco",             data: "2026-08-27", luogo: "Albano Vercellese (VC)", ritrovo: "ore 18:00" },
-  { numero: 7, nome: "Lungo le Vie d'Acqua",   data: "2026-09-11", luogo: "Formigliana (VC)",       ritrovo: "ore 18:00" },
-]
-
 export default function HomePage() {
-  const today = new Date()
-  const nextTappa = tappe.find(t => new Date(t.data) >= today) ?? null
-  const daysTo = nextTappa
-    ? Math.ceil((new Date(nextTappa.data).getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
-    : null
-
   const galleryDir = path.join(process.cwd(), 'public', 'gallery')
   const allPhotos: string[] = []
   for (const year of fs.readdirSync(galleryDir).filter(f => /^\d{4}$/.test(f))) {
@@ -49,8 +33,10 @@ export default function HomePage() {
         <ul className={styles.navLinks}>
           <li><Link href="/" className={`${styles.navLink} ${styles.navActive}`}>HOME</Link></li>
           <li><Link href="/classifica" className={styles.navLink}>CLASSIFICA</Link></li>
+          <li><Link href="/gare" className={styles.navLink}>GARE</Link></li>
           <li><Link href="/circuito"   className={styles.navLink}>CIRCUITO</Link></li>
           <li><Link href="/regole" className={styles.navLink}>REGOLE</Link></li>
+          <li><Link href="/societa" className={styles.navLink}>SOCIETÀ</Link></li>
           <li><Link href="/statuto" className={styles.navLink}>STATUTO</Link></li>
           <li><Link href="/gallery" className={styles.navLink}>GALLERIA</Link></li>
           <li><Link href="/admin" className={styles.navLink}>ADMIN</Link></li>
@@ -185,50 +171,35 @@ export default function HomePage() {
                 <li><span className={styles.check}>✓</span> Ritrovi mensili di gruppo</li>
                 <li><span className={styles.check}>✓</span> Classifica societaria di fine stagione</li>
                 <li><span className={styles.check}>✓</span> Convenzione Campo CONI per allenamenti</li>
-                <li><span className={styles.check}>✓</span> Convenzione SALUS Vercelli (fisioterapia e visite)</li>
-                <li><span className={styles.check}>✓</span> Convenzione Osteopata (Dr. Sebastiano Di Pasquale)</li>
-                <li><span className={styles.check}>✓</span> Accesso portale Errea per divise societarie</li>
+                <li><span className={styles.check}>✓</span> Convenzioni con osteopata, massaggiatori, nutrizionista e tecnici</li>
+                <li><span className={styles.check}>✓</span> Shop online Erreà con l&apos;abbigliamento ufficiale</li>
               </ul>
               <p className={styles.iscrivitiNote}>
                 Il tesseramento è valido dal 1 novembre al 31 ottobre.<br />
-                È richiesto certificato medico sportivo agonistico.
+                Consigliato il certificato medico sportivo agonistico.
               </p>
+              <Link href="/societa" className={styles.stepLink}>Convenzioni, partner e shop →</Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CSR26 TEASER */}
+      {/* CSR27 TEASER */}
       <section className={styles.csrTeaser}>
-        <div className={styles.csrBadge}>CSR26</div>
-        <h2 className={styles.csrTitle}>2° CIRCUITO SESIA RUNNING 2026</h2>
-        <p className={styles.csrSub}>7 tappe nella Provincia di Vercelli · Marzo — Settembre 2026</p>
-
-        {nextTappa && (
-          <div className={styles.csrNextCard}>
-            <div className={styles.csrNextLabel}>PROSSIMA TAPPA</div>
-            <div className={styles.csrNextName}>{nextTappa.nome}</div>
-            <div className={styles.csrNextDetail}>
-              {new Date(nextTappa.data).toLocaleDateString('it-IT',
-                { day: 'numeric', month: 'long', year: 'numeric' })} · {nextTappa.luogo} · Ritrovo {nextTappa.ritrovo}
-            </div>
-            <div className={styles.csrCountdown}>
-              <span className={styles.csrDays}>{daysTo}</span>
-              <span className={styles.csrDaysLabel}>giorni al via</span>
-            </div>
-          </div>
-        )}
+        <div className={styles.csrBadge}>CSR27</div>
+        <h2 className={styles.csrTitle}>3° CIRCUITO SESIA RUNNING</h2>
+        <p className={styles.csrSub}>In preparazione · tappe e date in arrivo</p>
 
         <a href="/circuito" className={styles.csrCta}>
-          VEDI IL PROGRAMMA COMPLETO →
+          SCOPRI IL CIRCUITO →
         </a>
       </section>
 
       {/* CLASSIFICA TEASER */}
       <section className={styles.classificaTeaser}>
         <div className={styles.reveal}>
-          <p className={styles.sectionLabel}>Stagione 2025–26</p>
-          <h2 className={styles.sectionTitleSmall}>CLASSIFICA SOCIETARIA 2025–26</h2>
+          <p className={styles.sectionLabel}>Stagione 2026–27</p>
+          <h2 className={styles.sectionTitleSmall}>CLASSIFICA SOCIETARIA 2026–27</h2>
           <div className={styles.classificaDeco}>
             <span style={{ width: '80px' }} />
             <span style={{ width: '16px', background: 'var(--sr-green)' }} />

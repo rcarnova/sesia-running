@@ -7,6 +7,7 @@ import Link from 'next/link'
 import headerStyles from '../page.module.css'
 import styles from './admin.module.css'
 import { Classifica } from '@/lib/types'
+import { SOGLIA_GRATUITO } from '@/lib/stagione'
 
 const ADMIN_SECRET = process.env.NEXT_PUBLIC_ADMIN_SECRET ?? ''
 
@@ -40,7 +41,7 @@ export default function AdminPage() {
   }
 
   const stats = classifica ? {
-    gratuiti: classifica.atleti.filter((a) => a.punti >= 100).length,
+    gratuiti: classifica.atleti.filter((a) => a.punti >= SOGLIA_GRATUITO).length,
     mediaPunti: classifica.atleti.length
       ? Math.round(classifica.atleti.reduce((s, a) => s + a.punti, 0) / classifica.atleti.length)
       : 0,
@@ -63,8 +64,10 @@ export default function AdminPage() {
         <nav className={headerStyles.nav}>
           <Link href="/" className={headerStyles.navLink}>Home</Link>
           <Link href="/classifica" className={headerStyles.navLink}>Classifica</Link>
+          <Link href="/gare" className={headerStyles.navLink}>Gare</Link>
           <Link href="/circuito"   className={headerStyles.navLink}>Circuito</Link>
           <Link href="/regole" className={headerStyles.navLink}>Regole</Link>
+          <Link href="/societa" className={headerStyles.navLink}>Società</Link>
           <Link href="/statuto" className={headerStyles.navLink}>Statuto</Link>
           <Link href="/gallery" className={headerStyles.navLink}>Galleria</Link>
           <Link href="/admin" className={`${headerStyles.navLink} ${headerStyles.navActive}`}>Admin</Link>
@@ -79,7 +82,7 @@ export default function AdminPage() {
             <table className={styles.historyTable}>
               <tbody>
                 <tr>
-                  <td>Atleti con ≥ 100 punti (tessera gratuita)</td>
+                  <td>Atleti con ≥ {SOGLIA_GRATUITO} punti (tessera gratuita)</td>
                   <td className={styles.statusOk}>{stats.gratuiti}</td>
                 </tr>
                 <tr>

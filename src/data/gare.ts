@@ -31,6 +31,7 @@ export interface Gara {
   regola: Regola
   edizioni: Edizione[]
   affidabilita?: 'alta' | 'media' | 'bassa'  // forza il livello calcolato
+  inattiva?: string   // motivo: la gara resta in archivio nel codice ma non compare sul sito
   nota?: string
 }
 
@@ -66,7 +67,7 @@ export const gare: Gara[] = [
     nota: 'Nel 2026 è passata al formato serale legato alla Sagra dell’Asino. Percorso misto asfalto e sterrato, Panissa della Pro Loco.',
   },
   {
-    id: 'livorno-run', nome: 'Livorno Run', luogo: 'Livorno Ferraris (VC)', organizzatore: 'con MST',
+    id: 'livorno-run', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Livorno Run', luogo: 'Livorno Ferraris (VC)', organizzatore: 'con MST',
     tipo: 'strada', distanze: ['5,5 km corsa', 'camminata'], momento: 'sera',
     sesia: 'organizza', circuito: 'CSR',
     regola: { k: 'ennesimo', mese: 5, dow: VEN, n: 2 },
@@ -94,7 +95,7 @@ export const gare: Gara[] = [
       { data: '2026-08-16', numero: 4, nota: '5ª tappa del 2° Circuito' },
     ],
     affidabilita: 'media',
-    nota: 'Legata alla sagra di paese. Nel 2027 Ferragosto cade di domenica: da confermare se si corre il 15 o il 22.',
+    nota: 'Legata alla sagra di paese.',
   },
   {
     id: 'corriparco', nome: 'Corriparco', luogo: 'Albano Vercellese (VC)',
@@ -117,7 +118,7 @@ export const gare: Gara[] = [
       { data: '2026-09-11', numero: 2, nota: 'Tappa finale del 2° Circuito, percorso al contrario' },
     ],
     affidabilita: 'media',
-    nota: 'Entrambe le edizioni l’11 settembre, ma nel 2027 cade di sabato: probabile spostamento in settimana.',
+    // nota rimossa: indicava il giorno previsto nel 2027
   },
 
   // ── Altre iniziative organizzate o co-organizzate ──
@@ -151,7 +152,7 @@ export const gare: Gara[] = [
     nota: 'Intorno alla Festa della Donna, partenza e arrivo in Piazza Cavour.',
   },
   {
-    id: 'run4hope', nome: 'Run4Hope', luogo: 'Olcenengo - Vercelli',
+    id: 'run4hope', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Run4Hope', luogo: 'Olcenengo - Vercelli',
     tipo: 'strada', distanze: ['staffetta di circa 13 km'], momento: 'mattina',
     sesia: 'collabora', benefica: true,
     regola: { k: 'variabile' },
@@ -209,21 +210,21 @@ export const gare: Gara[] = [
     nota: 'Campionato regionale Fidal. Si corre a cavallo tra novembre e dicembre, non sempre la prima domenica di dicembre.',
   },
   {
-    id: 'pella-orta', nome: 'Pella-Orta', luogo: 'Pella (NO)', organizzatore: 'Circuito Running',
+    id: 'pella-orta', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Pella-Orta', luogo: 'Pella (NO)', organizzatore: 'Circuito Running',
     tipo: 'strada', distanze: ['14,5 km'], momento: 'mattina',
     sesia: 'ritrovo',
     regola: { k: 'ennesimo', mese: 11, dow: DOM, n: 1 },
     edizioni: [{ data: '2025-11-02', nota: 'Torna dopo alcuni anni, rientro in battello' }],
   },
   {
-    id: 'busto-arsizio', nome: 'Busto Arsizio, mezza e 10 km', luogo: 'Busto Arsizio (VA)',
+    id: 'busto-arsizio', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Busto Arsizio, mezza e 10 km', luogo: 'Busto Arsizio (VA)',
     tipo: 'strada', distanze: ['21 km', '10 km'], momento: 'mattina',
     sesia: 'ritrovo',
     regola: { k: 'ennesimo', mese: 11, dow: DOM, n: 2 },
     edizioni: [{ data: '2024-11-10', nota: 'Prima trasferta della stagione 24/25, oltre 1.600 iscritti' }],
   },
   {
-    id: 'mezza-due-laghi', nome: 'Mezza dei Due Laghi', luogo: 'Lago Maggiore',
+    id: 'mezza-due-laghi', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Mezza dei Due Laghi', luogo: 'Lago Maggiore',
     tipo: 'strada', distanze: ['21,097 km'], momento: 'mattina',
     sesia: 'partecipa',
     regola: { k: 'ennesimo', mese: 3, dow: DOM, n: 1 },
@@ -269,7 +270,7 @@ export const gare: Gara[] = [
     nota: 'Il circuito premia i gruppi più numerosi: iscriversi sempre come Sesia Running.',
   },
   {
-    id: 'stra-crova', nome: 'Stra Crova Salasc', luogo: 'Salasco (VC)', organizzatore: 'Olimpia Runners',
+    id: 'stra-crova', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Stra Crova Salasc', luogo: 'Salasco (VC)', organizzatore: 'Olimpia Runners',
     tipo: 'strada', distanze: ['5,5 km'], momento: 'sera',
     sesia: 'partecipa',
     regola: { k: 'ennesimo', mese: 5, dow: VEN, n: 4 },
@@ -298,14 +299,14 @@ export const gare: Gara[] = [
     edizioni: [{ data: '2025-06-13' }, { data: '2026-06-12' }],
   },
   {
-    id: 'moncrivello', nome: 'Corsa di Moncrivello', luogo: 'Moncrivello (VC)',
+    id: 'moncrivello', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Corsa di Moncrivello', luogo: 'Moncrivello (VC)',
     tipo: 'strada', distanze: ['7 km'], momento: 'sera',
     sesia: 'partecipa',
     regola: { k: 'ennesimo', mese: 6, dow: GIO, n: 2 },
     edizioni: [{ data: '2025-06-12' }],
   },
   {
-    id: 'spinetta', nome: 'Spinetta Marengo 10 km', luogo: 'Spinetta Marengo (AL)',
+    id: 'spinetta', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Spinetta Marengo 10 km', luogo: 'Spinetta Marengo (AL)',
     tipo: 'strada', distanze: ['10 km'], momento: 'mattina',
     sesia: 'partecipa',
     regola: { k: 'ennesimo', mese: 6, dow: DOM, n: 3 },
@@ -320,7 +321,7 @@ export const gare: Gara[] = [
     edizioni: [{ data: '2025-06-26' }, { data: '2026-06-25' }],
   },
   {
-    id: 'asigliano-di-corsa', nome: 'Asigliano di Corsa', luogo: 'Asigliano Vercellese (VC)', organizzatore: 'GP Trinese',
+    id: 'asigliano-di-corsa', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Asigliano di Corsa', luogo: 'Asigliano Vercellese (VC)', organizzatore: 'GP Trinese',
     tipo: 'strada', distanze: ['5,5 km Fidal', 'camminata'], momento: 'sera',
     sesia: 'partecipa',
     regola: { k: 'ennesimo', mese: 7, dow: MER, n: -1 },
@@ -395,7 +396,7 @@ export const gare: Gara[] = [
     edizioni: [{ data: '2025-12-21' }],
   },
   {
-    id: 'camminata-rosa-caresanablot', nome: 'Camminata in Rosa AIRC', luogo: 'Caresanablot (VC)',
+    id: 'camminata-rosa-caresanablot', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Camminata in Rosa AIRC', luogo: 'Caresanablot (VC)',
     tipo: 'camminata', distanze: ['passeggiata'], momento: 'pomeriggio',
     sesia: 'partecipa', benefica: true,
     regola: { k: 'ennesimo', mese: 10, dow: SAB, n: 3 },
@@ -426,21 +427,21 @@ export const gare: Gara[] = [
     edizioni: [{ data: '2026-05-10' }],
   },
   {
-    id: 'tavian-trophy', nome: 'Tavian Tourist Trophy', luogo: 'Tavigliano (BI)', organizzatore: 'Atletica Santhià',
+    id: 'tavian-trophy', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Tavian Tourist Trophy', luogo: 'Tavigliano (BI)', organizzatore: 'Atletica Santhià',
     tipo: 'trail', distanze: ['6 km corsa in montagna, staffetta o individuale'], momento: 'mattina',
     sesia: 'partecipa',
     regola: { k: 'ennesimo', mese: 6, dow: DOM, n: 4 },
     edizioni: [{ data: '2025-06-22', numero: 3 }],
   },
   {
-    id: 'trail-ruscalla', nome: 'Trail della Ruscalla', luogo: 'Camino (AL)',
+    id: 'trail-ruscalla', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Trail della Ruscalla', luogo: 'Camino (AL)',
     tipo: 'trail', distanze: ['10 km'], momento: 'mattina',
     sesia: 'partecipa',
     regola: { k: 'ennesimo', mese: 10, dow: DOM, n: 3 },
     edizioni: [{ data: '2025-10-19' }],
   },
   {
-    id: 'martinaska', nome: 'Martinaska Trail', luogo: 'San Martino Canavese (TO)',
+    id: 'martinaska', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Martinaska Trail', luogo: 'San Martino Canavese (TO)',
     tipo: 'trail', distanze: ['15 km 400 D+'], momento: 'mattina',
     sesia: 'partecipa',
     regola: { k: 'ennesimo', mese: 11, dow: SAB, n: 2 },

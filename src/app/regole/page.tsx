@@ -9,6 +9,7 @@ const REGOLE = [
   { pts: '1', desc: 'Gara conclusa ≤ 5 km' },
   { pts: '2', desc: 'Gara conclusa 5,1 – 10 km' },
   { pts: '2', desc: 'Partecipazione a ritrovo societario' },
+  { pts: '2', desc: 'Partecipazione ad allenamento collettivo' },
   { pts: '2', desc: 'Piazzamento sul podio di categoria' },
   { pts: '4', desc: 'Gara conclusa 10,1 – 15 km' },
   { pts: '6', desc: 'Gara conclusa 15,1 – 21,1 km (mezza maratona)' },
@@ -33,14 +34,16 @@ export default function RegolePage() {
           <Image src="/logo.png" alt="Sesia Running Vercelli" width={52} height={52} className={headerStyles.logoImg} />
           <div>
             <div className={headerStyles.headerTitle}>Sesia Running Vercelli</div>
-            <div className={headerStyles.headerSub}>Stagione 25-26</div>
+            <div className={headerStyles.headerSub}>Stagione 26-27</div>
           </div>
         </div>
         <nav className={headerStyles.nav}>
           <Link href="/" className={headerStyles.navLink}>Home</Link>
           <Link href="/classifica" className={headerStyles.navLink}>Classifica</Link>
+          <Link href="/gare" className={headerStyles.navLink}>Gare</Link>
           <Link href="/circuito"   className={headerStyles.navLink}>Circuito</Link>
           <Link href="/regole" className={`${headerStyles.navLink} ${headerStyles.navActive}`}>Regole</Link>
+          <Link href="/societa" className={headerStyles.navLink}>Società</Link>
           <Link href="/statuto" className={headerStyles.navLink}>Statuto</Link>
           <Link href="/gallery" className={headerStyles.navLink}>Galleria</Link>
           <Link href="/admin" className={headerStyles.navLink}>Admin</Link>
@@ -78,7 +81,21 @@ export default function RegolePage() {
             <div className={styles.rewardPts}>100 punti</div>
             <div className={styles.rewardText}>
               Chi raggiunge 100 punti ottiene il <strong>tesseramento gratuito</strong> per la stagione successiva.
-              Le gare corse con tessera FIDAL non sono conteggiate.
+              La classifica permette anche di ricevere eventuali premi alla cena di fine stagione.
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Regolamento completo</h2>
+          <div className={styles.rewardCard}>
+            <div className={styles.rewardText}>
+              Tesseramento e quote, visita medica, divisa, comportamento in gara, utilizzo delle foto
+              e programma della stagione 2026/2027.
+              <br /><br />
+              <a href="/documenti/regolamento-societario-26-27.pdf" className={styles.docLink} target="_blank" rel="noopener">
+                Scarica il regolamento 26-27 (PDF) →
+              </a>
             </div>
           </div>
         </section>

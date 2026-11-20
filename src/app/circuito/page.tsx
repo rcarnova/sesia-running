@@ -121,37 +121,8 @@ const tappe: Tappa[] = [
   },
 ]
 
-function getToday() {
-  const d = new Date()
-  d.setHours(0, 0, 0, 0)
-  return d
-}
-
-function daysUntil(isoDate: string) {
-  const target = new Date(isoDate)
-  target.setHours(0, 0, 0, 0)
-  return Math.ceil((target.getTime() - getToday().getTime()) / 86400000)
-}
-
-type Status = 'past' | 'next' | 'future'
-
-function computeStatuses(): Status[] {
-  const today = getToday()
-  let nextFound = false
-  return tappe.map((t) => {
-    const d = new Date(t.data)
-    d.setHours(0, 0, 0, 0)
-    if (d < today) return 'past'
-    if (!nextFound) { nextFound = true; return 'next' }
-    return 'future'
-  })
-}
-
 export default function CircuitoPage() {
-  const [regolaOpen, setRegolaOpen] = useState(false)
-  const statuses = computeStatuses()
-  const nextIdx = statuses.indexOf('next')
-  const nextTappa = nextIdx >= 0 ? tappe[nextIdx] : null
+  const [archivioOpen, setArchivioOpen] = useState(false)
 
   return (
     <div className={headerStyles.wrapper}>
@@ -160,14 +131,16 @@ export default function CircuitoPage() {
           <Image src="/logo.png" alt="Sesia Running Vercelli" width={52} height={52} className={headerStyles.logoImg} />
           <div>
             <div className={headerStyles.headerTitle}>Sesia Running Vercelli</div>
-            <div className={headerStyles.headerSub}>Circuito 2026</div>
+            <div className={headerStyles.headerSub}>Circuito 2027</div>
           </div>
         </div>
         <nav className={headerStyles.nav}>
           <Link href="/"          className={headerStyles.navLink}>Home</Link>
           <Link href="/classifica" className={headerStyles.navLink}>Classifica</Link>
+          <Link href="/gare" className={headerStyles.navLink}>Gare</Link>
           <Link href="/circuito"  className={`${headerStyles.navLink} ${headerStyles.navActive}`}>Circuito</Link>
           <Link href="/regole"    className={headerStyles.navLink}>Regole</Link>
+          <Link href="/societa"    className={headerStyles.navLink}>Società</Link>
           <Link href="/statuto"   className={headerStyles.navLink}>Statuto</Link>
           <Link href="/gallery"   className={headerStyles.navLink}>Galleria</Link>
           <Link href="/admin"     className={headerStyles.navLink}>Admin</Link>
@@ -176,37 +149,39 @@ export default function CircuitoPage() {
 
       {/* HERO */}
       <div className={styles.hero}>
-        <span className={styles.heroBadge}>CSR26</span>
-        <h1 className={styles.heroTitle}>2° CIRCUITO SESIA RUNNING 2026</h1>
-        <p className={styles.heroSub}>7 tappe nella Provincia di Vercelli · Marzo — Settembre 2026</p>
+        <span className={styles.heroBadge}>CSR27</span>
+        <h1 className={styles.heroTitle}>3° CIRCUITO SESIA RUNNING</h1>
+        <p className={styles.heroSub}>In preparazione · tappe e date in arrivo</p>
       </div>
 
       <div className={styles.content}>
 
-        {/* PROSSIMA TAPPA */}
-        {nextTappa && (
-          <div className={styles.nextBox}>
-            <div className={styles.nextLabel}>PROSSIMA TAPPA</div>
-            <div className={styles.nextName}>{nextTappa.nome}</div>
-            <div className={styles.nextMeta}>
-              {nextTappa.dataLabel} · {nextTappa.luogo} · Ritrovo {nextTappa.ritrovo}
-            </div>
-            <div className={styles.countdown}>
-              <span className={styles.countdownNum}>{daysUntil(nextTappa.data)}</span>
-              <span className={styles.countdownLabel}>tra {daysUntil(nextTappa.data) === 1 ? 'domani' : `${daysUntil(nextTappa.data)} giorni`}</span>
-            </div>
+        {/* CSR27 IN ARRIVO */}
+        <div className={styles.nextBox}>
+          <div className={styles.nextLabel}>CSR27 IN ARRIVO</div>
+          <div className={styles.nextName}>Stiamo preparando il 3° Circuito</div>
+          <div className={styles.nextMeta}>
+            Tappe, località e date saranno pubblicate qui appena confermate.
+            Per restare aggiornato segui i nostri canali o scrivi a{' '}
+            <a href="mailto:asdsesiarunning@libero.it" className={styles.regolamentoLink}>asdsesiarunning@libero.it</a>.
           </div>
-        )}
+        </div>
 
-        {/* TIMELINE */}
-        <div className={styles.timeline}>
-          {tappe.map((tappa, i) => {
-            const status = statuses[i]
-            return (
-              <div key={tappa.numero} className={`${styles.card} ${styles[status]}`}>
-                <div className={`${styles.cardNum} ${styles[`num${status.charAt(0).toUpperCase() + status.slice(1)}`]}`}>
-                  {tappa.numero}
-                </div>
+        {/* ARCHIVIO CSR26 */}
+        <div className={styles.regolamento}>
+          <button
+            className={styles.regolamentoToggle}
+            onClick={() => setArchivioOpen((o) => !o)}
+          >
+            RIVEDI IL CSR26 · 7 TAPPE {archivioOpen ? '▴' : '▾'}
+          </button>
+        </div>
+
+        {archivioOpen && (
+          <div className={styles.timeline}>
+            {tappe.map((tappa) => (
+              <div key={tappa.numero} className={`${styles.card} ${styles.past}`}>
+                <div className={`${styles.cardNum} ${styles.numPast}`}>{tappa.numero}</div>
                 <div className={styles.cardBody}>
                   <div className={styles.cardHeader}>
                     <span className={styles.tappaNome}>{tappa.nome}</span>
@@ -215,48 +190,13 @@ export default function CircuitoPage() {
                       <span className={styles.kmBadge}>{tappa.km} km</span>
                     </div>
                   </div>
-                  <div className={`${styles.tappaData} ${status === 'past' ? styles.dataStrike : ''}`}>
-                    {tappa.dataLabel}
-                  </div>
-                  <div className={styles.tappaMeta}>
-                    📍 {tappa.luogo} &nbsp;·&nbsp; 🕗 Ritrovo {tappa.ritrovo}
-                  </div>
-                  <ul className={styles.distanze}>
-                    {tappa.distanze.map((d) => (
-                      <li key={d.tipo} className={styles.distanzaItem}>
-                        <span className={styles.distanzaTipo}>{d.tipo}</span>
-                        <span className={styles.distanzaPartenza}>Partenza {d.partenza}</span>
-                        {d.km && <span className={styles.distanzaKm}>{d.km} km</span>}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className={styles.tappaData}>{tappa.dataLabel}</div>
+                  <div className={styles.tappaMeta}>📍 {tappa.luogo}</div>
                 </div>
               </div>
-            )
-          })}
-        </div>
-
-        {/* REGOLAMENTO */}
-        <div className={styles.regolamento}>
-          <button
-            className={styles.regolamentoToggle}
-            onClick={() => setRegolaOpen((o) => !o)}
-          >
-            REGOLAMENTO CSR26 {regolaOpen ? '▴' : '▾'}
-          </button>
-          {regolaOpen && (
-            <div className={styles.regolamentoBody}>
-              Il CSR26 si compone di 7 tappe tra marzo e settembre 2026 nella Provincia di Vercelli.
-              È possibile partecipare a una o più tappe, scegliendo liberamente tra corsa e camminata.
-              Per la classifica finale verranno considerati i 5 punteggi migliori per atleta.
-              Premiazioni alla 7ª tappa a Formigliana l&apos;11 settembre 2026.
-              <br /><br />
-              Per info: <a href="mailto:asdsesiarunning@libero.it" className={styles.regolamentoLink}>asdsesiarunning@libero.it</a>
-              &nbsp;·&nbsp;
-              <a href="tel:+393206437356" className={styles.regolamentoLink}>320 6437356</a>
-            </div>
-          )}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* FOOTER NOTE */}
         <p className={styles.footerNote}>

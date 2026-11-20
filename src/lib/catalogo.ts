@@ -23,7 +23,7 @@ function calcolaAffidabilita(g: Gara, confermate: number, passate: number): Affi
 }
 
 export function catalogoPerAnno(anno: number): GaraPrevista[] {
-  const base = gare.map((g) => {
+  const base = gare.filter((g) => !g.inattiva).map((g) => {
     const passate = g.edizioni.filter((e) => !e.confermata)
     const ufficiale = g.edizioni.find((e) => e.confermata && e.data.startsWith(String(anno)))
     const confermate = passate.filter(

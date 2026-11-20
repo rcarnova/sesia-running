@@ -63,8 +63,10 @@ export default function GalleryPage() {
         <nav className={headerStyles.nav}>
           <Link href="/" className={headerStyles.navLink}>Home</Link>
           <Link href="/classifica" className={headerStyles.navLink}>Classifica</Link>
+          <Link href="/gare" className={headerStyles.navLink}>Gare</Link>
           <Link href="/circuito"   className={headerStyles.navLink}>Circuito</Link>
           <Link href="/regole" className={headerStyles.navLink}>Regole</Link>
+          <Link href="/societa" className={headerStyles.navLink}>Società</Link>
           <Link href="/statuto" className={headerStyles.navLink}>Statuto</Link>
           <Link href="/gallery" className={`${headerStyles.navLink} ${headerStyles.navActive}`}>Galleria</Link>
           <Link href="/admin" className={headerStyles.navLink}>Admin</Link>

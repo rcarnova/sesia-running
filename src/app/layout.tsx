@@ -18,7 +18,7 @@ const barlowCondensed = Barlow_Condensed({
 
 export const metadata: Metadata = {
   title: 'Sesia Running Vercelli',
-  description: 'Classifica societaria stagione 2025-26',
+  description: 'Classifica societaria stagione 2026-27',
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',

@@ -1,0 +1,174 @@
+/* src/app/societa/societa.module.css */
+
+.hero {
+  background: var(--sr-blue);
+  padding: 40px 40px 36px;
+  border-bottom: 3px solid var(--sr-green);
+}
+
+.heroBadge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--sr-aqua);
+  background: rgba(90, 180, 214, 0.12);
+  border: 1px solid rgba(90, 180, 214, 0.3);
+  border-radius: 2px;
+  padding: 3px 10px;
+  margin-bottom: 12px;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: 36px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sr-white);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.heroSub {
+  font-family: var(--font-body);
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: var(--sr-aqua);
+}
+.heroSub a { color: var(--sr-aqua); text-decoration: none; border-bottom: 1px solid rgba(90, 180, 214, 0.5); }
+.heroSub a:hover { color: var(--sr-white); }
+
+.content {
+  padding: 32px 40px 48px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.section { margin-bottom: 48px; scroll-margin-top: 20px; }
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sr-blue);
+  border-left: 4px solid var(--sr-green);
+  padding-left: 12px;
+  margin-bottom: 18px;
+}
+
+.intro {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: #3a5a7a;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  max-width: 640px;
+}
+
+/* SHOP */
+.shop {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.shopImgWrap { display: block; }
+.shopImg {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d6e0ec;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(26, 79, 138, 0.12);
+}
+
+.shopText {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: #2a4a6a;
+  line-height: 1.55;
+}
+
+.steps { margin: 14px 0 20px 20px; }
+.steps li { margin-bottom: 6px; }
+
+.code {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--sr-white);
+  background: var(--sr-blue);
+  padding: 1px 8px;
+  border-radius: 2px;
+}
+
+.cta {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  color: var(--sr-white);
+  background: var(--sr-green);
+  padding: 10px 22px;
+  text-decoration: none;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+.cta:hover { background: var(--sr-blue); }
+
+.small {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #5a7a9a;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+.small a, .shopText a { color: var(--sr-blue); }
+
+/* CARDS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: #fff;
+  border-left: 4px solid var(--sr-blue);
+  padding: 14px 18px;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(26, 79, 138, 0.08);
+}
+.cardPartner { border-left-color: var(--sr-green); }
+
+.cardRuolo {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--sr-green);
+  margin-bottom: 2px;
+}
+
+.cardNome {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: var(--sr-blue);
+  line-height: 1.1;
+}
+
+.cardDove {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #5a7a9a;
+  margin-top: 6px;
+}
+
+@media (max-width: 700px) {
+  .hero { padding: 28px 20px 24px; }
+  .content { padding: 24px 20px 40px; }
+  .shop { grid-template-columns: 1fr; }
+  .shopImgWrap { max-width: 320px; }
+}
