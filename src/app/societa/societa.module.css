@@ -172,3 +172,10 @@
   .shop { grid-template-columns: 1fr; }
   .shopImgWrap { max-width: 320px; }
 }
+
+.cardPresidente {
+  background: var(--sr-blue);
+  border-left-color: var(--sr-green);
+}
+.cardPresidente .cardRuolo { color: var(--sr-aqua); }
+.cardPresidente .cardNome { color: var(--sr-white); }

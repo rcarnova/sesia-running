@@ -9,11 +9,22 @@ import styles from './societa.module.css'
 import { STAGIONE_BREVE } from '@/lib/stagione'
 
 export const metadata: Metadata = {
-  title: 'Società: shop, convenzioni e partner | Sesia Running Vercelli',
-  description: 'Lo shop ufficiale Erreà, le convenzioni riservate ai tesserati e i partner di Sesia Running Vercelli.',
+  title: 'Società: direttivo, shop, convenzioni e partner | Sesia Running Vercelli',
+  description: 'Il Consiglio Direttivo, lo shop ufficiale Erreà, le convenzioni riservate ai tesserati e i partner di Sesia Running Vercelli.',
 }
 
 type Voce = { nome: string; ruolo: string; dove?: string }
+
+// Consiglio Direttivo (fonte: Ros, 20/11/2026). Consiglieri in ordine alfabetico.
+const DIRETTIVO: Voce[] = [
+  { nome: 'Manuel Lucchini', ruolo: 'Presidente' },
+  { nome: 'Paola Birolo', ruolo: 'Consigliera' },
+  { nome: 'Stefano Carenzo', ruolo: 'Consigliere' },
+  { nome: 'Rosario Carnovale', ruolo: 'Consigliere' },
+  { nome: 'Piero Castello', ruolo: 'Consigliere' },
+  { nome: 'Daniele Fiorentino', ruolo: 'Consigliere' },
+  { nome: 'Silvio Giroldi', ruolo: 'Consigliere' },
+]
 
 // Recapiti telefonici volutamente non pubblicati: si ottengono dalla società.
 const CONVENZIONI: Voce[] = [
@@ -43,7 +54,7 @@ export default function SocietaPage() {
           <Image src="/logo.png" alt="Sesia Running Vercelli" width={52} height={52} className={headerStyles.logoImg} />
           <div>
             <div className={headerStyles.headerTitle}>Sesia Running Vercelli</div>
-            <div className={headerStyles.headerSub}>Shop, convenzioni e partner</div>
+            <div className={headerStyles.headerSub}>Direttivo, shop, convenzioni e partner</div>
           </div>
         </div>
         <nav className={headerStyles.nav}>
@@ -63,11 +74,27 @@ export default function SocietaPage() {
         <span className={styles.heroBadge}>STAGIONE {STAGIONE_BREVE}</span>
         <h1 className={styles.heroTitle}>La società</h1>
         <p className={styles.heroSub}>
-          <a href="#shop">Shop ufficiale</a> · <a href="#convenzioni">Convenzioni</a> · <a href="#partner">Partner</a>
+          <a href="#direttivo">Consiglio Direttivo</a> · <a href="#shop">Shop ufficiale</a> · <a href="#convenzioni">Convenzioni</a> · <a href="#partner">Partner</a>
         </p>
       </div>
 
       <div className={styles.content}>
+
+        {/* CONSIGLIO DIRETTIVO */}
+        <section id="direttivo" className={styles.section}>
+          <h2 className={styles.sectionTitle}>Consiglio Direttivo</h2>
+          <p className={styles.intro}>
+            Le persone che guidano l&apos;associazione. Per proposte, idee o domande puoi rivolgerti a ognuno di loro.
+          </p>
+          <div className={styles.grid}>
+            {DIRETTIVO.map((v) => (
+              <div key={v.nome} className={`${styles.card} ${v.ruolo === 'Presidente' ? styles.cardPresidente : ''}`}>
+                <div className={styles.cardRuolo}>{v.ruolo}</div>
+                <div className={styles.cardNome}>{v.nome}</div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* SHOP */}
         <section id="shop" className={styles.section}>
