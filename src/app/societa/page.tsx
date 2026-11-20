@@ -28,6 +28,7 @@ const DIRETTIVO: Voce[] = [
 
 // Recapiti telefonici volutamente non pubblicati: si ottengono dalla società.
 const CONVENZIONI: Voce[] = [
+  { nome: 'Campo CONI', ruolo: 'Pista di atletica', dove: 'Accesso al campo per gli allenamenti' },
   { nome: 'Sebastiano Di Pasquale', ruolo: 'Osteopata', dove: 'Via Calatafimi 18, Vercelli · su appuntamento' },
   { nome: 'Manuela Genti', ruolo: 'Massaggiatrice sportiva', dove: 'Via Guala Bicheri 4, Vercelli · su appuntamento' },
   { nome: 'Michele Rodighiero', ruolo: 'Massaggiatore sportivo' },
