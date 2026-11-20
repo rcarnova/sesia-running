@@ -9,7 +9,7 @@ export const STAGIONE_BREVE = '26-27'    // formato breve, es. "Regolamento 26-2
 
 export const GID_PER_STAGIONE: Record<string, string | null> = {
   '2025-26': '1508135863',
-  '2026-27': null, // da inserire quando Manuel crea il tab 26/27
+  '2026-27': '1760157871', // tab "Classifica 26-27"
 }
 
 export const SOGLIA_GRATUITO = 100

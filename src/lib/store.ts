@@ -18,13 +18,15 @@ export async function fetchClassificaFromDrive(): Promise<Classifica> {
   if (!fileId || !gid) return VUOTA
 
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${fileId}/export?format=xlsx&gid=${gid}`
+    // Il formato xlsx esporta l'intero file (e il parser leggerebbe sempre il primo tab):
+    // il csv esporta solo il tab indicato dal gid, cioè la stagione giusta.
+    const url = `https://docs.google.com/spreadsheets/d/${fileId}/export?format=csv&gid=${gid}`
     const res = await fetch(url, { next: { revalidate: 3600 } })
 
     if (!res.ok) throw new Error(`Drive responded ${res.status}`)
 
-    const buffer = Buffer.from(await res.arrayBuffer())
-    const wb = XLSX.read(buffer, { type: 'buffer' })
+    const csv = await res.text()
+    const wb = XLSX.read(csv, { type: 'string', raw: false })
     const ws = wb.Sheets[wb.SheetNames[0]]
     const rows = XLSX.utils.sheet_to_json(ws, { defval: 0 }) as Record<string, unknown>[]
 
@@ -39,6 +41,9 @@ export async function fetchClassificaFromDrive(): Promise<Classifica> {
       .filter((a) => a.nome.length > 0)
 
     atleti.sort((a, b) => b.punti - a.punti)
+
+    // Tab appena creato: ci sono solo i nomi, nessun punto ancora assegnato.
+    if (atleti.every((a) => a.punti === 0)) return VUOTA
 
     const conAllenamenti = rows.some((r) =>
       ['Numero Allenamenti', 'Allenamenti', 'NUMERO ALLENAMENTI'].some((k) => k in r))
