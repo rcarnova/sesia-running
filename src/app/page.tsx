@@ -87,7 +87,7 @@ export default function HomePage() {
         <div className={styles.chiSiamoGrid}>
           <div className={styles.reveal}>
             <div className={styles.statHero}>
-              <div className={styles.statBigNum}>101</div>
+              <div className={styles.statBigNum}>106</div>
               <div className={styles.statBigLabel}>TESSERATI</div>
             </div>
             <p className={styles.chiSiamoText}>
