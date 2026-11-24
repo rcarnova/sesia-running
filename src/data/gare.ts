@@ -183,10 +183,14 @@ export const gare: Gara[] = [
   // ── Mezze maratone e classiche ──
   {
     id: 'novara-half', nome: 'Novara Half Marathon', luogo: 'Novara (NO)', organizzatore: 'Circuito Running',
-    tipo: 'strada', distanze: ['21,097 km', '10 km'], momento: 'mattina',
+    tipo: 'strada', distanze: ['21,097 km Fidal', '21 km EPS non competitiva', '10 km San Gaudenzio Run (Fidal ed EPS)'], momento: 'mattina',
     sesia: 'ritrovo',
     regola: { k: 'ennesimo', mese: 1, dow: DOM, n: -1 },
-    edizioni: [{ data: '2025-01-26' }, { data: '2026-01-25', nota: 'Oltre 1.900 iscritti, trasferta societaria' }],
+    edizioni: [
+      { data: '2025-01-26' },
+      { data: '2026-01-25', nota: 'Oltre 1.900 iscritti, trasferta societaria' },
+      { data: '2027-01-31', confermata: true, nota: 'Data ufficiale (circuitorunning.it). Partenza da viale Kennedy, Pala Dal Lago: mezza alle 9.30, 10 km alle 9.45' },
+    ],
     nota: 'Sconto sulla quota per iscrizioni di società (minimo 11 iscritti).',
   },
   {
