@@ -424,12 +424,22 @@ export const gare: Gara[] = [
     edizioni: [{ data: '2026-03-28' }],
   },
   {
-    id: 'brutal-trail', nome: 'Brutal Trail', luogo: 'Gattinara (VC)',
+    id: 'brutal-trail', nome: 'Brutal Trail Gattinara', luogo: 'Gattinara (VC)',
     tipo: 'trail', distanze: ['21 km', 'distanze brevi'], momento: 'mattina',
     sesia: 'partecipa',
     regola: { k: 'variabile' },
     edizioni: [{ data: '2025-05-18' }, { data: '2026-04-26' }],
     nota: 'Primavera, ma la data è cambiata di tre settimane tra un anno e l’altro.',
+  },
+  {
+    id: 'brutal-trail-ghemme', nome: 'Brutal Trail Ghemme', luogo: 'Ghemme (NO)', organizzatore: 'A.S.D. Brutal Project',
+    tipo: 'trail', distanze: ['21 km 2200 D+', '17 km 1700 D+', '13 km 1300 D+', '9 km 1000 D+', '5 km 500 D+', '5 km non competitiva', '8 km Fast Trail non competitiva'], momento: 'mattina',
+    sesia: 'partecipa',
+    regola: { k: 'variabile' },
+    edizioni: [
+      { data: '2027-01-24', confermata: true, nota: 'Data ufficiale (wedosport.net). Partenza dal vigneto Torraccia del Piantavigna alle 9.30, Fast Trail alle 9.45' },
+    ],
+    nota: 'Trail invernale tra i vigneti, edizioni anche nel 2021 e dal 2023 al 2026. Le gare competitive richiedono certificato agonistico.',
   },
   {
     id: 'trail-diga', nome: 'Trail della Diga', luogo: 'Biellese',
