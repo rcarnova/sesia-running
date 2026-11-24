@@ -243,7 +243,11 @@ export const gare: Gara[] = [
     tipo: 'strada', distanze: ['42,195 km', 'staffetta'], momento: 'mattina',
     sesia: 'partecipa',
     regola: { k: 'variabile' },
-    edizioni: [{ data: '2025-04-06' }, { data: '2026-04-12' }],
+    edizioni: [
+      { data: '2025-04-06' },
+      { data: '2026-04-12' },
+      { data: '2027-04-04', confermata: true, nota: '25ª edizione. Partenza alle 8.15 da piazza Duomo, pettorali al Milano Running Festival dall’1 al 3 aprile (non il giorno della gara)' },
+    ],
     nota: 'Domenica di aprile, data fissata ogni anno dall’organizzazione.',
   },
 
