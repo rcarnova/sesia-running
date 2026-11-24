@@ -214,11 +214,15 @@ export const gare: Gara[] = [
     nota: 'Campionato regionale Fidal. Si corre a cavallo tra novembre e dicembre, non sempre la prima domenica di dicembre.',
   },
   {
-    id: 'pella-orta', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Pella-Orta', luogo: 'Pella (NO)', organizzatore: 'Circuito Running',
+    id: 'pella-orta', nome: 'Pella-Orta', luogo: 'Pella (NO)', organizzatore: 'Circuito Running',
     tipo: 'strada', distanze: ['14,5 km'], momento: 'mattina',
     sesia: 'ritrovo',
     regola: { k: 'ennesimo', mese: 11, dow: DOM, n: 1 },
-    edizioni: [{ data: '2025-11-02', nota: 'Torna dopo alcuni anni, rientro in battello' }],
+    affidabilita: 'bassa', // 2025 il 2 novembre, 2026 il 29 novembre: il mese regge, il giorno no
+    edizioni: [
+      { data: '2025-11-02', nota: 'Torna dopo alcuni anni, rientro in battello' },
+      { data: '2026-11-29', confermata: true, nota: 'Data ufficiale (circuitorunning.it)' },
+    ],
   },
   {
     id: 'busto-arsizio', inattiva: 'nessuna edizione nel 2026 (rimossa nov 2026)', nome: 'Busto Arsizio, mezza e 10 km', luogo: 'Busto Arsizio (VA)',
